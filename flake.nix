@@ -32,15 +32,12 @@
     let
       # These values need to be set to be in line with where the flake exists
       # on the host filesystem if you want to use live-updating configs.
-      # `pathFromHome` must be defined *relative to* the root of the invoking
-      # user's home directory.
-      repoDir = rec {
-        name = "nix-home-redux";
-        pathFromHome = "workbench/${name}";
-      };
+      # `pathFromHome` must be defined *relative to* the invoking user's home
+      # directory.
+      repoDir = rec { name = "nixrc"; pathFromHome = "${name}"; };
 
       # Utility to let us symlink and un-symlink our non-nix config files on
-      # demand. 
+      # demand.
       linkConfig = config: rec {
         # Set to true to have non-nix configs update as they're changed (i.e.
         # without requiring a rebuild).
@@ -53,6 +50,7 @@
             config.lib.file.mkOutOfStoreSymlink "${extRoot}/${path}"
           else
             "${flakeRoot}/${path}";
+
       };
 
       # Where, relative to the root of the flake, we can access our config
@@ -63,6 +61,7 @@
         # ^^^^ usually firmware/driver/hardware-related.
       };
 
+      # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
         telescope-fzf-native =
           prev.callPackage ./custom/telescope-fzf-native.nix {
@@ -118,7 +117,7 @@
         # Linux Server config, no graphical client, but uses nerd-fonts, so
         # whatever terminal you use should support them for the best
         # experience.
-        linux-server = mkHMConf defaultTestUser { };
+        linux-server = mkHMConf defaultUser { };
 
         # The full experience
         nixosdesktop = mkHMConf defaultUser {
