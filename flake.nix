@@ -122,11 +122,10 @@
 
         # The full experience
         nixosdesktop = mkHMConf defaultUser {
-          configuration = {
-            imports = coreModules
-              ++ uMods [ "kitty" "discord" "love2d" "bashnixos" "gitgeneral" ];
-          };
+          configuration.imports = coreModules
+            ++ uMods [ "kitty" "discord" "love2d" "bashnixos" "gitgeneral" ];
         };
+
       };
 
       # System configurations
@@ -145,5 +144,6 @@
           ];
         };
       };
+
     };
 }
