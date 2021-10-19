@@ -1,0 +1,83 @@
+{ pkgs, config, lib, linkConfig, modPath, ... }@inputs:
+let
+  mkLink = linkConfig config;
+  ts = pkgs.tree-sitter.builtGrammars;
+  confRoot = "${modPath.user}/nvim";
+
+  languageServers = with pkgs; [
+    nodePackages.typescript-language-server
+    nodePackages.eslint_d
+    nodePackages.prettier
+    nodePackages.yaml-language-server
+    nodePackages.vscode-json-languageserver
+    nodePackages.pyright
+    sumneko-lua-language-server
+  ];
+
+  # (xdg.configFile's)
+  treesitterParsers = {
+    "nvim/parser/c.so".source = "${ts.tree-sitter-c}/parser";
+    "nvim/parser/lua.so".source = "${ts.tree-sitter-lua}/parser";
+    "nvim/parser/rust.so".source = "${ts.tree-sitter-rust}/parser";
+    "nvim/parser/python.so".source = "${ts.tree-sitter-python}/parser";
+    "nvim/parser/typescript.so".source = "${ts.tree-sitter-typescript}/parser";
+    "nvim/parser/javascript.so".source = "${ts.tree-sitter-javascript}/parser";
+    "nvim/parser/tsx.so".source = "${ts.tree-sitter-tsx}/parser";
+    "nvim/parser/nix.so".source = "${ts.tree-sitter-nix}/parser";
+    "nvim/parser/bash.so".source = "${ts.tree-sitter-bash}/parser";
+    "nvim/parser/comment.so".source = "${ts.tree-sitter-comment}/parser";
+  };
+
+in {
+  #
+  # Shell configurations
+  #
+  programs.bash = {
+    bashrcExtra = ''
+      export EDITOR="nvim"
+      alias n="nvim -O"
+    '';
+  };
+
+  programs.fish = {
+    shellAliases.n = "nvim -O";
+    shellInit = ''
+      set -gx EDITOR nvim
+    '';
+  };
+
+  home.packages = with pkgs;
+    [ tree-sitter stylua nixfmt black python39Packages.isort fd neovim-remote ]
+    ++ languageServers;
+
+  # Required for lang-servers
+  home.file.".npmrc".text = ''
+    prefix=~/.npm
+  '';
+
+  programs.neovim = {
+    enable = true;
+    package = pkgs.neovim-nightly;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
+    extraConfig = ''
+      lua require('dot')
+    '';
+  };
+
+  # Do the requisite black magic for telescope-fzf
+  xdg.dataFile."nvim/site/pack/packer/start/telescope-fzf-native.nvim/build/libfzf.so".source =
+    "${pkgs.telescope-fzf-native}/build/libfzf.so";
+
+  #
+  # Acutal config files
+  #
+  xdg.configFile = {
+    "nvim/lua/dot/init.lua".source = mkLink.to "${confRoot}/lua/dot/init.lua";
+    "nvim/ftplugin/markdown.vim".source =
+      mkLink.to "${confRoot}/ftpludin/markdown.vim";
+  } // treesitterParsers;
+}
