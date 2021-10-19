@@ -101,21 +101,27 @@
         };
       };
 
-      mkHMConf = attrs:
-        home-manager.lib.homeManagerConfiguration (hmConfDefaults // attrs);
+      mkHMConf = user: attrs:
+        home-manager.lib.homeManagerConfiguration (hmConfDefaults // {
+          username = user;
+          homeDirectory = "/home/${user}";
+        } // attrs);
+
     in {
       homeManagerConfigurations = {
 
         # My home machine
-        garuda-desktop = mkHMConf {
+        garuda-desktop = mkHMConf defaultUser {
           configuration.imports = coreModules ++ uMods [ "kittynonnixos" ];
         };
 
-        # Linux Server config, no graphical client
-        linux-server = mkHMConf rec { username = defaultTestUser; homeDirectory = "/home/${username}"; };
+        # Linux Server config, no graphical client, but uses nerd-fonts, so
+        # whatever terminal you use should support them for the best
+        # experience.
+        linux-server = mkHMConf defaultTestUser { };
 
         # The full experience
-        nixosdesktop = mkHMConf {
+        nixosdesktop = mkHMConf defaultUser {
           configuration = {
             imports = coreModules
               ++ uMods [ "kitty" "discord" "love2d" "bashnixos" "gitgeneral" ];
