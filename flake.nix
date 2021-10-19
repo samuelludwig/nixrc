@@ -30,21 +30,18 @@
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
     , neovim-nightly-overlay, ... }:
     let
-      # These values need to be set to be in line with where the flake exists
-      # on the host filesystem if you want to use live-updating configs.
-      # `pathFromHome` must be defined *relative to* the invoking user's home
-      # directory.
-      repoDir = rec { name = "nixrc"; pathFromHome = "${name}"; };
+      # Import attrs generated from running the `init-repo.sh` script.
+      meta = import ./metaInfo.nix;
 
       # Utility to let us symlink and un-symlink our non-nix config files on
       # demand.
       linkConfig = config: rec {
         # Set to true to have non-nix configs update as they're changed (i.e.
         # without requiring a rebuild).
-        live = false;
+        live = true;
 
         flakeRoot = self.outPath;
-        extRoot = "${config.home.homeDirectory}/${repoDir.pathFromHome}";
+        extRoot = meta.repoDir;
         to = path:
           if live then
             config.lib.file.mkOutOfStoreSymlink "${extRoot}/${path}"
@@ -85,15 +82,15 @@
       #
       # Defaults: change these as you'd like.
       #
-      defaultUser = "dot";
-      defaultTestUser = "dottest";
+      stdUser = meta.username;
+      stdTestUser = "${stdUser}-test";
 
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
         extraSpecialArgs = { inherit inputs linkConfig modPath; };
-        username = defaultUser;
-        homeDirectory = "/home/${username}";
+        username = meta.username;
+        homeDirectory = meta.homeDir;
         configuration = {
           imports = coreModules ++ [ ];
           nixpkgs.overlays = neovimOverlays ++ [ ];
@@ -110,17 +107,17 @@
       homeManagerConfigurations = {
 
         # My home machine
-        garuda-desktop = mkHMConf defaultUser {
+        garuda-desktop = mkHMConf stdUser {
           configuration.imports = coreModules ++ uMods [ "kittynonnixos" ];
         };
 
         # Linux Server config, no graphical client, but uses nerd-fonts, so
         # whatever terminal you use should support them for the best
         # experience.
-        linux-server = mkHMConf defaultUser { };
+        linux-server = mkHMConf stdUser { };
 
         # The full experience
-        nixosdesktop = mkHMConf defaultUser {
+        nixosdesktop = mkHMConf stdUser {
           configuration.imports = coreModules
             ++ uMods [ "kitty" "discord" "love2d" "bashnixos" "gitgeneral" ];
         };
