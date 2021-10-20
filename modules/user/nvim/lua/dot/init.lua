@@ -184,11 +184,14 @@ packer.startup(function()
     end,
   })
 
+  --
+  -- COLORSCHEMES
+  --
+
   use({
     "tjdevries/colorbuddy.vim",
     "tjdevries/gruvbuddy.nvim",
   })
-
   use({
     "jacksonludwig/vim-earl-grey",
     requires = { "rktjmp/lush.nvim" },
@@ -202,6 +205,72 @@ packer.startup(function()
     --   ]])
     -- end,
   })
+  use { 'sainnhe/sonokai' } -- Settings found in `:help sonokai`
+  use { 'sainnhe/edge' }
+  use { 'sainnhe/everforest' }
+  use { 'sainnhe/gruvbox-material' }
+  use { 'Th3Whit3Wolf/space-nvim' }
+  use { 'ray-x/aurora' }
+  use { 'tanvirtin/monokai.nvim' }
+  use { 'maaslalani/nordbuddy',
+    config = function()
+      vim.g.nord_underline_option = 'none'
+      vim.g.nord_italic = true
+      vim.g.nord_italic_comments = false
+      vim.g.nord_minimal_mode = false
+      --require('nordbuddy').colorscheme(
+      -- This function takes a table as argument.
+      -- If an empty table is passed, these values are implicitly assigned.
+      --{
+        -- Underline style used for spelling
+        -- Options: 'none', 'underline', 'undercurl'
+        --underline_option = 'none',
+
+        -- Italics for certain keywords such as constructors, functions,
+        -- labels and namespaces
+        --italic = true,
+
+        -- Italic styled comments
+        --italic_comments = false,
+
+        -- Minimal mode: different choice of colors for Tabs and StatusLine
+        --minimal_mode = false
+      --})
+      end
+    }
+  use { 'kyazdani42/blue-moon' }
+  use { 'mhartington/oceanic-next' }
+  use { 'glepnir/zephyr-nvim' }
+  use { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' }
+  use { 'bkegley/gloombuddy', requires = { 'tjdevries/colorbuddy.vim' } }
+  use { 'tomasiser/vim-code-dark' }
+  use { 'sts10/vim-pink-moon' }
+  use { 'shaunsingh/nord.nvim' }
+  use { 'shaunsingh/moonlight.nvim',
+    config = function()
+      vim.g.moonlight_italic_comments = true
+      vim.g.moonlight_italic_keywords = true
+      vim.g.moonlight_italic_functions = true
+      vim.g.moonlight_italic_variables = false
+      vim.g.moonlight_contrast = true
+      vim.g.moonlight_borders = false
+      vim.g.moonlight_disable_background = false
+    end
+  }
+  use { 'kamwitsta/flatwhite-vim' }
+  use { 'navarasu/onedark.nvim' }
+  use {
+    'ishan9299/nvim-solarized-lua',
+    config = function()
+      vim.g.solarized_italics = 1
+      vim.g.solarized_visibility = 'normal' -- low normal high
+      vim.g.solarized_diffmode = 'normal' -- low normal high
+    end
+  }
+
+ --
+ -- TELESCOPE
+ --
 
  use({
    "nvim-telescope/telescope.nvim",
@@ -581,7 +650,7 @@ packer.startup(function()
     config = function()
       require("luasnip.loaders.from_vscode").load()
       vim.cmd([[
-        imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>' 
+        imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
         inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
         snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
         snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
