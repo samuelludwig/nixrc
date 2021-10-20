@@ -47,7 +47,6 @@
             config.lib.file.mkOutOfStoreSymlink "${extRoot}/${path}"
           else
             "${flakeRoot}/${path}";
-
       };
 
       # Where, relative to the root of the flake, we can access our config
@@ -57,6 +56,17 @@
         system = "modules/system"; # For system-wide configs
         # ^^^^ usually firmware/driver/hardware-related.
       };
+
+      # This (./. + "path") is the only way to get nix to not complain about
+      # our string paths not being absolute.
+      toMod = type: name: builtins.toPath (./. + "/${modPath.${type}}/${name}");
+      toMods = type: modList: map (toMod type) modList;
+      uMods = modList: toMods "user" modList;
+      sysMods = modList: toMods "system" modList;
+
+      # Terminal needs for every machine.
+      coreModules =
+        uMods [ "core" "nvim" "tmux" "bashnonnixos" "fish" "starship" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
@@ -68,16 +78,6 @@
 
       neovimOverlays =
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
-
-      # This (./. + "path") is the only way to get nix to not complain about
-      # our string paths not being absolute.
-      toMod = type: name: builtins.toPath (./. + "/${modPath.${type}}/${name}");
-      toMods = type: modList: map (toMod type) modList;
-      uMods = modList: toMods "user" modList;
-      sysMods = modList: toMods "system" modList;
-
-      coreModules =
-        uMods [ "core" "nvim" "tmux" "bashnonnixos" "fish" "starship" ];
 
       #
       # Defaults: change these as you'd like.
@@ -92,11 +92,14 @@
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {
-          imports = coreModules ++ [ ];
+          imports = coreModules ++ uMods [ ] ++ sysMods [ ];
           nixpkgs.overlays = neovimOverlays ++ [ ];
         };
       };
 
+      #
+      # We want to actually define our configs with this function.
+      #
       mkHMConf = user: attrs:
         home-manager.lib.homeManagerConfiguration (hmConfDefaults // {
           username = user;
@@ -113,7 +116,8 @@
 
         # Linux Server config, no graphical client, but uses nerd-fonts, so
         # whatever terminal you use should support them for the best
-        # experience.
+        # experience. This can be used anywhere you just want to have your
+        # terminal-bound-apps-and-data managed.
         linux-server = mkHMConf stdUser { };
 
         # The full experience
