@@ -2,7 +2,7 @@
 
 At this moment, these configs prioritize non-NixOS Nix installations. In other
 words, Nix (with the `nix-command` and `flake` features enabled) is installed,
-and you want to use Home-Manager to manage your programs dotfiles. That is my
+and you want to use Home-Manager to manage your programs+dotfiles. That is my
 particular use-case for the time being.
 
 This repo provides a script, `init-repo.sh`, which will need to be run from the
@@ -12,14 +12,25 @@ directory, and where the repo lives on your filesystem).
 
 ## Use
 
-0) Install Nix if you have not already.
+0) Install Nix if you have not already, via:
 
-0.5) Enable flake-use if you have not already, via:
+```bash 
+# As a non-root user with sudo access, but DON'T INVOKE WITH SUDO, the script
+# will call it for you.
+curl -L https://nixos.org/nix/install | sh -s -- --daemon
+
+# (This installs Nix in multi-user mode)
+```
+
+(0.5) Enable flake-use if you have not already, via:
 
 Running `nix-env -iA nixpkgs.nixUnstable`
 
-And adding `experimental-features = nix-command flakes` to
+Adding `experimental-features = nix-command flakes` to
 `~/.config/nix/nix.conf`.
+
+And for good measure, if Nix is in multi-user mode, restart the daemon via
+`systemctl restart nix-daemon`.
 
 1) Clone the repo: `git clone git@github.com:samuelludwig/nixrc.git`
 
