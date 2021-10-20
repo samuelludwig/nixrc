@@ -66,7 +66,7 @@
 
       # Terminal needs for every machine.
       coreModules =
-        uMods [ "core" "nvim" "tmux" "bashnonnixos" "fish" "starship" ];
+        uMods [ "core" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
