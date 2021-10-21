@@ -26,8 +26,10 @@ curl -L https://nixos.org/nix/install | sh -s -- --daemon
 
 Running `nix-env -iA nixpkgs.nixUnstable`
 
-Adding `experimental-features = nix-command flakes` to
-`~/.config/nix/nix.conf`.
+Adding `experimental-features = nix-command flakes` to `~/.config/nix/nix.conf`
+(you may need to create it) AND/OR `/etc/nix/nix.conf`. The former will enable
+flakes and the new Nix CLI for just the current user, while the latter will
+enable them system-wide.
 
 And for good measure, if Nix is in multi-user mode, restart the daemon via
 `systemctl restart nix-daemon`.
