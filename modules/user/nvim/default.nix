@@ -1,8 +1,14 @@
-{ pkgs, config, lib, linkConfig, modPath, ... }@inputs:
+{ pkgs, config, lib, linkConfig, modPath, inputs, ... }@args:
 let
   mkLink = linkConfig config;
   ts = pkgs.tree-sitter.builtGrammars;
   confRoot = "${modPath.user}/nvim";
+
+  # Not currently working :(
+  phpLS = {
+    name = "php-serenata-language-server";
+    src = inputs.php-serenata-language-server;
+  };
 
   languageServers = with pkgs; [
     nodePackages.typescript-language-server
@@ -12,6 +18,7 @@ let
     nodePackages.vscode-json-languageserver
     nodePackages.pyright
     sumneko-lua-language-server
+    #phpLS
   ];
 
   # (xdg.configFile's)
@@ -26,6 +33,7 @@ let
     "nvim/parser/nix.so".source = "${ts.tree-sitter-nix}/parser";
     "nvim/parser/bash.so".source = "${ts.tree-sitter-bash}/parser";
     "nvim/parser/comment.so".source = "${ts.tree-sitter-comment}/parser";
+    "nvim/parser/php.so".source = "${ts.tree-sitter-php}/parser";
   };
 
 in {

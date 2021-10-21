@@ -1,0 +1,8 @@
+session_name: php-dev
+windows:
+- window_name: dev window
+  layout: main-vertical
+  panes:
+    - echo hello1
+    - echo hello2
+    - echo hello2

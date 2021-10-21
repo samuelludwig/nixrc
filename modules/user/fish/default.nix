@@ -38,5 +38,5 @@ in {
     #'';
   };
 
-  #xdg.configFile = { "fish".source = mkLink.to "${confRoot}/"; };
+  #xdg.configFile."fish".source = mkLink.to "${confRoot}/";
 }

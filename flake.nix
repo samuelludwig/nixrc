@@ -25,6 +25,11 @@
       url = "github:oh-my-fish/plugin-fasd";
       flake = false;
     };
+
+    php-serenata-language-server = {
+      url = "gitlab:Serenata/Serenata";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
