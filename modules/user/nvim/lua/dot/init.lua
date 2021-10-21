@@ -707,7 +707,8 @@ opt.foldenable = false
 opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = "nosplit"
-opt.guicursor = ""
+-- Cursor
+opt.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 vim.cmd([[
 augroup YankHighlight

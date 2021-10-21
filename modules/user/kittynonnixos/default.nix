@@ -1,16 +1,16 @@
-{ pkgs, config, lib, ... }: {
-  home.file.".config/kitty/kitty.conf".text = ''
-      font_family JetBrainsMono Nerd Font
-      bold_font auto
-      bold_italic_font auto
-      italic_font auto
+{ pkgs, config, lib, modPath, linkConfig, inputs, ... }:
+let
+  mkLink = linkConfig config;
+  confRoot = "${modPath.user}/kitty";
+  #nixGL = (pkgs.callPackage inputs.nixGL { });
+in {
+  #programs.kitty = {
+  #  enable = true;
+  #  package = pkgs.writeShellScriptBin "kitty" (''
+  #    #!/bin/sh
 
-      font_size 12
-
-      disable_ligatures always
-      map ctrl+shift+t new_tab_with_cwd
-      touch_scroll_multiplier 2.0
-      symbol_map U+f101-U+f208 nonicons
-      enable_audio_bell no
-  '';
+  #    ${nixGL}/bin/nixGL ${pkgs.kitty}/bin/kitty "$@" 
+  #  '');
+  #};
+  xdg.configFile."kitty/kitty.conf".source = mkLink.to "${confRoot}/kitty.conf";
 }

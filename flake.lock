@@ -114,6 +114,22 @@
         "type": "github"
       }
     },
+    "nixGL": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633350348,
+        "narHash": "sha256-rfA7lqV+cR3bQt4lT2F+6qrIzJSPloJaGVATR9u+5yY=",
+        "owner": "guibou",
+        "repo": "nixGL",
+        "rev": "c4aa5aa15af5d75e2f614a70063a2d341e8e3461",
+        "type": "github"
+      },
+      "original": {
+        "owner": "guibou",
+        "repo": "nixGL",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1633793047,
@@ -167,6 +183,7 @@
         "fish-fasd": "fish-fasd",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
+        "nixGL": "nixGL",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "php-serenata-language-server": "php-serenata-language-server",

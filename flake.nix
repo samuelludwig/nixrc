@@ -30,6 +30,11 @@
       url = "gitlab:Serenata/Serenata";
       flake = false;
     };
+
+    nixGL = {
+      url = "github:guibou/nixGL";
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
@@ -116,7 +121,10 @@
 
         # My home machine
         garuda-desktop = mkHMConf stdUser {
-          configuration.imports = coreModules ++ uMods [ "kittynonnixos" ];
+          configuration = {
+            imports = coreModules ++ uMods [ "kittynonnixos" ];
+            nixpkgs.overlays = neovimOverlays ++ [ ];
+          };
         };
 
         # Linux Server config, no graphical client, but uses nerd-fonts, so

@@ -31,6 +31,7 @@ let
     "nvim/parser/javascript.so".source = "${ts.tree-sitter-javascript}/parser";
     "nvim/parser/tsx.so".source = "${ts.tree-sitter-tsx}/parser";
     "nvim/parser/nix.so".source = "${ts.tree-sitter-nix}/parser";
+    "nvim/parser/yaml.so".source = "${ts.tree-sitter-yaml}/parser";
     "nvim/parser/bash.so".source = "${ts.tree-sitter-bash}/parser";
     "nvim/parser/comment.so".source = "${ts.tree-sitter-comment}/parser";
     "nvim/parser/php.so".source = "${ts.tree-sitter-php}/parser";
