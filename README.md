@@ -6,9 +6,9 @@ and you want to use Home-Manager to manage your programs+dotfiles. That is my
 particular use-case for the time being.
 
 This repo provides a script, `init-repo.sh`, which will need to be run from the
-root of the repo whenever it's cloned/copied over. This will determine a couple
-sensible default/utility values (i.e. your current username, your home
-directory, and where the repo lives on your filesystem).
+root of the repo whenever it's cloned/copied over (i.e. pulled). This will
+determine a couple sensible default/utility values (i.e. your current username,
+your home directory, and where the repo lives on your filesystem).
 
 ## Use
 

@@ -21,6 +21,17 @@ let
     #phpLS
   ];
 
+  formatters = with pkgs; [
+    php80Packages.phpcbf
+    tree-sitter
+    stylua
+    nixfmt
+    black
+    python39Packages.isort
+    fd
+    neovim-remote
+  ];
+
   # (xdg.configFile's)
   treesitterParsers = {
     "nvim/parser/c.so".source = "${ts.tree-sitter-c}/parser";
@@ -55,9 +66,7 @@ in {
     '';
   };
 
-  home.packages = with pkgs;
-    [ tree-sitter stylua nixfmt black python39Packages.isort fd neovim-remote ]
-    ++ languageServers;
+  home.packages = with pkgs; [ ] ++ formatters ++ languageServers;
 
   # Required for lang-servers
   home.file.".npmrc".text = ''
