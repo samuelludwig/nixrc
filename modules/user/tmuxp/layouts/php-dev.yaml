@@ -3,6 +3,5 @@ windows:
 - window_name: dev window
   layout: main-vertical
   panes:
-    - echo hello1
-    - echo hello2
-    - echo hello2
+    - if command -v psysh &> /dev/null; then psysh; else echo "Psysh not found, skipping...";
+    - nvim

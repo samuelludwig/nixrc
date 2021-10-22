@@ -63,6 +63,7 @@
       # modules.
       modPath = {
         user = "modules/user"; # For user-specific configs
+        lang = "modules/user/langs"; # For programming-language-specific configs
         system = "modules/system"; # For system-wide configs
         # ^^^^ usually firmware/driver/hardware-related.
       };
@@ -72,11 +73,13 @@
       toMod = type: name: builtins.toPath (./. + "/${modPath.${type}}/${name}");
       toMods = type: modList: map (toMod type) modList;
       uMods = modList: toMods "user" modList;
+      langMods = modList: toMods "lang" modList;
       sysMods = modList: toMods "system" modList;
 
       # Terminal needs for every machine.
       coreModules =
-        uMods [ "core" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ];
+        uMods [ "core" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ]
+        ++ langMods [ "php" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
