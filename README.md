@@ -6,9 +6,10 @@ and you want to use Home-Manager to manage your programs+dotfiles. That is my
 particular use-case for the time being.
 
 This repo provides a script, `init-repo.sh`, which will need to be run from the
-root of the repo whenever it's cloned/copied over (i.e. pulled). This will
-determine a couple sensible default/utility values (i.e. your current username,
-your home directory, and where the repo lives on your filesystem).
+root of the repo whenever it's cloned/copied over (i.e. pulled) _iff you don't
+want to use_ `build-usr.sh`, which does it for you. This will determine a
+couple sensible default/utility values (i.e. your current username, your home
+directory, and where the repo lives on your filesystem).
 
 ## Use
 
@@ -38,10 +39,7 @@ And for good measure, if Nix is in multi-user mode, restart the daemon via
 
 2) `cd` into the repo.
 
-3) Run `./init-repo.sh` (this will populate the `metaInfo.nix` file with some
-important stuff).
-
-4) Run `./build-usr <config-name>`, which will build and activate the chosen
+3) Run `./build-usr <config-name>`, which will build and activate the chosen
 home-manager config.
 
 
