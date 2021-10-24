@@ -79,9 +79,16 @@
       sysMods = modList: toMods "system" modList;
 
       # Terminal needs for every machine.
-      coreModules =
-        uMods [ "core" "dev-tools" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ]
-        ++ langMods [ "php" "python" "js" "elixir" "rust" ];
+      coreModules = uMods [
+        "core"
+        "dev-tools"
+        "nvim"
+        "tmux"
+        "tmuxp"
+        "bashnonnixos"
+        "fish"
+        "starship"
+      ] ++ langMods [ "php" "python" "js" "elixir" "rust" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
