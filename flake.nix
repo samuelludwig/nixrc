@@ -26,6 +26,8 @@
       flake = false;
     };
 
+    rust-overlay.url = "github:oxalica/rust-overlay";
+
     php-serenata-language-server = {
       url = "gitlab:Serenata/Serenata";
       flake = false;
@@ -38,7 +40,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, ... }:
+    , neovim-nightly-overlay, rust-overlay, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -78,8 +80,8 @@
 
       # Terminal needs for every machine.
       coreModules =
-        uMods [ "core" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ]
-        ++ langMods [ "php" ];
+        uMods [ "core" "dev-tools" "nvim" "tmux" "tmuxp" "bashnonnixos" "fish" "starship" ]
+        ++ langMods [ "php" "python" "js" "elixir" "rust" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
@@ -91,6 +93,8 @@
 
       neovimOverlays =
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
+      langOverlays = [ rust-overlay.overlay ];
+      developmentOverlays = neovimOverlays ++ langOverlays;
 
       #
       # Defaults: change these as you'd like.
@@ -106,7 +110,7 @@
         homeDirectory = meta.homeDir;
         configuration = {
           imports = coreModules ++ uMods [ ] ++ sysMods [ ];
-          nixpkgs.overlays = neovimOverlays ++ [ ];
+          nixpkgs.overlays = developmentOverlays;
         };
       };
 
