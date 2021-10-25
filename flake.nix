@@ -26,6 +26,8 @@
       flake = false;
     };
 
+    node2nix.url = "github:samuelludwig/node2nix-flake";
+
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     php-serenata-language-server = {
@@ -40,7 +42,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, rust-overlay, ... }:
+    , neovim-nightly-overlay, rust-overlay, node2nix, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -100,8 +102,11 @@
 
       neovimOverlays =
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
-      langOverlays = [ rust-overlay.overlay ];
-      developmentOverlays = neovimOverlays ++ langOverlays;
+      langOverlays = system: [
+        rust-overlay.overlay
+        node2nix.overlays.${system}
+      ];
+      developmentOverlays = system: neovimOverlays ++ (langOverlays system);
 
       #
       # Defaults: change these as you'd like.
@@ -117,7 +122,7 @@
         homeDirectory = meta.homeDir;
         configuration = {
           imports = coreModules ++ uMods [ ] ++ sysMods [ ];
-          nixpkgs.overlays = developmentOverlays;
+          nixpkgs.overlays = (developmentOverlays system);
         };
       };
 
@@ -134,10 +139,11 @@
       homeManagerConfigurations = {
 
         # My home machine
-        garuda-desktop = mkHMConf stdUser {
+        garuda-desktop = mkHMConf stdUser rec {
+          system = "x86_64-linux";
           configuration = {
             imports = coreModules ++ uMods [ "kittynonnixos" ];
-            nixpkgs.overlays = neovimOverlays ++ [ ];
+            nixpkgs.overlays = (developmentOverlays system) ++ [ ];
           };
         };
 

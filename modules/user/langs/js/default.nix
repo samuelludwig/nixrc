@@ -1,5 +1,5 @@
 { config, pkgs, libs, ... }: {
-  home.packages = [ pkgs.nodejs ];
+  home.packages = with pkgs; [ nodejs node2nix ];
 
   programs.bash = {
     bashrcExtra = ''
