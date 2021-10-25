@@ -1391,11 +1391,16 @@ let
       };
     };
   };
-  args = {
+in
+{
+  intelephense = nodeEnv.buildNodePackage {
     name = "intelephense";
     packageName = "intelephense";
     version = "1.7.1";
-    src = ./.;
+    src = fetchurl {
+      url = "https://registry.npmjs.org/intelephense/-/intelephense-1.7.1.tgz";
+      sha512 = "fIAeUVrsGs2/yX/GopLwXIw17t3aekM1KrOJ7r9xJhA1VlGoR+YtIFxdXLcOnC1oRRdBkEz46xZEHZh5W+3vwQ==";
+    };
     dependencies = [
       sources."@bmewburn/js-beautify-1.13.0"
       sources."@bmewburn/minidom-1.0.1"
@@ -1605,23 +1610,4 @@ let
     bypassCache = true;
     reconstructLock = true;
   };
-in
-{
-  args = args;
-  sources = sources;
-  tarball = nodeEnv.buildNodeSourceDist args;
-  package = nodeEnv.buildNodePackage args;
-  shell = nodeEnv.buildNodeShell args;
-  nodeDependencies = nodeEnv.buildNodeDependencies (lib.overrideExisting args {
-    src = stdenv.mkDerivation {
-      name = args.name + "-package-json";
-      src = nix-gitignore.gitignoreSourcePure [
-        "*"
-        "!package.json"
-        "!package-lock.json"
-      ] args.src;
-      dontBuild = true;
-      installPhase = "mkdir -p $out; cp -r ./* $out;";
-    };
-  });
 }

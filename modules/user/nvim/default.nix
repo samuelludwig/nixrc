@@ -16,7 +16,7 @@ let
     nodePackages.vscode-json-languageserver
     nodePackages.pyright
     sumneko-lua-language-server
-    (callPackage ./intelephense { }).package
+    (callPackage ./intelephense { inherit pkgs; }).intelephense
   ];
 
   formatters = with pkgs; [
