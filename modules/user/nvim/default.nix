@@ -5,10 +5,8 @@ let
   confRoot = "${modPath.user}/nvim";
 
   # Not currently working :(
-  phpLS = {
-    name = "php-serenata-language-server";
-    src = inputs.php-serenata-language-server;
-  };
+  #phpLS = { name = "php-serenata-language-server"; src = inputs.php-serenata-language-server; };
+  #phpLS = (pkgs.callPackage ./intelephense-nix { });
 
   languageServers = with pkgs; [
     nodePackages.typescript-language-server
@@ -18,7 +16,7 @@ let
     nodePackages.vscode-json-languageserver
     nodePackages.pyright
     sumneko-lua-language-server
-    #phpLS
+    (callPackage ./intelephense { }).package
   ];
 
   formatters = with pkgs; [

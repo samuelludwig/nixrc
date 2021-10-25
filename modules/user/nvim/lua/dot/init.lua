@@ -205,16 +205,17 @@ packer.startup(function()
     --   ]])
     -- end,
   })
-  use { 'sainnhe/sonokai' } -- Settings found in `:help sonokai`
-  use { 'sainnhe/edge' }
-  use { 'sainnhe/everforest' }
-  use { 'sainnhe/gruvbox-material' }
-  use { 'Th3Whit3Wolf/space-nvim' }
-  use { 'ray-x/aurora' }
-  use { 'tanvirtin/monokai.nvim' }
-  use { 'maaslalani/nordbuddy',
+  use({ "sainnhe/sonokai" }) -- Settings found in `:help sonokai`
+  use({ "sainnhe/edge" })
+  use({ "sainnhe/everforest" })
+  use({ "sainnhe/gruvbox-material" })
+  use({ "Th3Whit3Wolf/space-nvim" })
+  use({ "ray-x/aurora" })
+  use({ "tanvirtin/monokai.nvim" })
+  use({
+    "maaslalani/nordbuddy",
     config = function()
-      vim.g.nord_underline_option = 'none'
+      vim.g.nord_underline_option = "none"
       vim.g.nord_italic = true
       vim.g.nord_italic_comments = false
       vim.g.nord_minimal_mode = false
@@ -222,31 +223,32 @@ packer.startup(function()
       -- This function takes a table as argument.
       -- If an empty table is passed, these values are implicitly assigned.
       --{
-        -- Underline style used for spelling
-        -- Options: 'none', 'underline', 'undercurl'
-        --underline_option = 'none',
+      -- Underline style used for spelling
+      -- Options: 'none', 'underline', 'undercurl'
+      --underline_option = 'none',
 
-        -- Italics for certain keywords such as constructors, functions,
-        -- labels and namespaces
-        --italic = true,
+      -- Italics for certain keywords such as constructors, functions,
+      -- labels and namespaces
+      --italic = true,
 
-        -- Italic styled comments
-        --italic_comments = false,
+      -- Italic styled comments
+      --italic_comments = false,
 
-        -- Minimal mode: different choice of colors for Tabs and StatusLine
-        --minimal_mode = false
+      -- Minimal mode: different choice of colors for Tabs and StatusLine
+      --minimal_mode = false
       --})
-      end
-    }
-  use { 'kyazdani42/blue-moon' }
-  use { 'mhartington/oceanic-next' }
-  use { 'glepnir/zephyr-nvim' }
-  use { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' }
-  use { 'bkegley/gloombuddy', requires = { 'tjdevries/colorbuddy.vim' } }
-  use { 'tomasiser/vim-code-dark' }
-  use { 'sts10/vim-pink-moon' }
-  use { 'shaunsingh/nord.nvim' }
-  use { 'shaunsingh/moonlight.nvim',
+    end,
+  })
+  use({ "kyazdani42/blue-moon" })
+  use({ "mhartington/oceanic-next" })
+  use({ "glepnir/zephyr-nvim" })
+  use({ "rockerBOO/boo-colorscheme-nvim", branch = "main" })
+  use({ "bkegley/gloombuddy", requires = { "tjdevries/colorbuddy.vim" } })
+  use({ "tomasiser/vim-code-dark" })
+  use({ "sts10/vim-pink-moon" })
+  use({ "shaunsingh/nord.nvim" })
+  use({
+    "shaunsingh/moonlight.nvim",
     config = function()
       vim.g.moonlight_italic_comments = true
       vim.g.moonlight_italic_keywords = true
@@ -255,111 +257,111 @@ packer.startup(function()
       vim.g.moonlight_contrast = true
       vim.g.moonlight_borders = false
       vim.g.moonlight_disable_background = false
-    end
-  }
-  use { 'kamwitsta/flatwhite-vim' }
-  use { 'navarasu/onedark.nvim' }
-  use {
-    'ishan9299/nvim-solarized-lua',
+    end,
+  })
+  use({ "kamwitsta/flatwhite-vim" })
+  use({ "navarasu/onedark.nvim" })
+  use({
+    "ishan9299/nvim-solarized-lua",
     config = function()
       vim.g.solarized_italics = 1
-      vim.g.solarized_visibility = 'normal' -- low normal high
-      vim.g.solarized_diffmode = 'normal' -- low normal high
-    end
-  }
+      vim.g.solarized_visibility = "normal" -- low normal high
+      vim.g.solarized_diffmode = "normal" -- low normal high
+    end,
+  })
 
- --
- -- TELESCOPE
- --
+  --
+  -- TELESCOPE
+  --
 
- use({
-   "nvim-telescope/telescope.nvim",
-   requires = { "nvim-telescope/telescope-fzf-native.nvim" },
-   config = function()
-     local telescope = require("telescope")
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = { "nvim-telescope/telescope-fzf-native.nvim" },
+    config = function()
+      local telescope = require("telescope")
 
-     telescope.setup({
-       pickers = {
-         find_files = { disable_devicons = true },
-         buffers = { disable_devicons = true },
-         oldfiles = { disable_devicons = true },
-         grep_string = { disable_devicons = true },
-         live_grep = { disable_devicons = true },
-         file_browser = { disable_devicons = true },
-       },
- --       extensions = {
- --         fzf = {
- --           override_generic_sorter = true, -- override the generic sorter
- --           override_file_sorter = true, -- override the file sorter
- --           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
- --         },
- --       },
-     })
+      telescope.setup({
+        pickers = {
+          find_files = { disable_devicons = true },
+          buffers = { disable_devicons = true },
+          oldfiles = { disable_devicons = true },
+          grep_string = { disable_devicons = true },
+          live_grep = { disable_devicons = true },
+          file_browser = { disable_devicons = true },
+        },
+        --       extensions = {
+        --         fzf = {
+        --           override_generic_sorter = true, -- override the generic sorter
+        --           override_file_sorter = true, -- override the file sorter
+        --           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        --         },
+        --       },
+      })
 
- --     telescope.load_extension("fzf")
+      --     telescope.load_extension("fzf")
 
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader><leader>",
-       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>fh",
-       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy({ hidden = true }))<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>fr",
-       "<cmd>lua require('telescope.builtin').oldfiles(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>bb",
-       "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>g",
-       "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>ff",
-       "<cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>vc",
-       "<cmd>lua require('telescope.builtin').git_commits(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>vb",
-       "<cmd>lua require('telescope.builtin').git_branches(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>sdd",
-       "<cmd>lua require('telescope.builtin').lsp_document_diagnostics(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-     vim.api.nvim_set_keymap(
-       "n",
-       "<leader>sdw",
-       "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics(require('telescope.themes').get_ivy())<cr>",
-       { noremap = true, silent = true }
-     )
-   end,
- })
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader><leader>",
+        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fh",
+        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy({ hidden = true }))<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fr",
+        "<cmd>lua require('telescope.builtin').oldfiles(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>bb",
+        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>g",
+        "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>ff",
+        "<cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>vc",
+        "<cmd>lua require('telescope.builtin').git_commits(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>vb",
+        "<cmd>lua require('telescope.builtin').git_branches(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>sdd",
+        "<cmd>lua require('telescope.builtin').lsp_document_diagnostics(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>sdw",
+        "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics(require('telescope.themes').get_ivy())<cr>",
+        { noremap = true, silent = true }
+      )
+    end,
+  })
 
   use({
     "ahmedkhalf/project.nvim",
@@ -375,6 +377,7 @@ packer.startup(function()
         highlight = {
           enable = true,
         },
+        indent = { enable = true },
       })
     end,
   })
@@ -510,6 +513,10 @@ packer.startup(function()
         flags = {
           debounce_text_changes = 250,
         },
+      })
+
+      nvim_lsp.intelephense.setup({
+        on_attach = on_attach_common,
       })
 
       nvim_lsp.tsserver.setup({
@@ -711,7 +718,7 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = "nosplit"
 -- Cursor
-opt.guicursor="n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 vim.cmd([[
 augroup YankHighlight
