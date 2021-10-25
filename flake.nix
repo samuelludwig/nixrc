@@ -27,6 +27,7 @@
     };
 
     node2nix.url = "github:samuelludwig/node2nix-flake";
+    composer2nix.url = "github:samuelludwig/composer2nix/flakeify";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
 
@@ -42,7 +43,7 @@
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, rust-overlay, node2nix, ... }:
+    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -104,6 +105,7 @@
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
       langOverlays = system: [
         rust-overlay.overlay
+        composer2nix.overlays.${system}
         node2nix.overlays.${system}
       ];
       developmentOverlays = system: neovimOverlays ++ (langOverlays system);

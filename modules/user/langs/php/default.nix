@@ -2,9 +2,10 @@
 let
   php = pkgs.php80;
   psysh = pkgs.php80Packages.psysh;
+  composer2nix = pkgs.composer2nix;
   mkLink = linkConfig config;
 in {
-  home.packages = [ php psysh ];
+  home.packages = [ php psysh composer2nix ];
 
   #
   # Link .ini files
