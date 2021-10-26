@@ -26,9 +26,8 @@
       flake = false;
     };
 
-    node2nix.url = "github:samuelludwig/node2nix-flake";
-    composer2nix.url = "github:samuelludwig/composer2nix/flakeify";
-
+    node2nix.url = "github:samuelludwig/node2nix";
+    composer2nix.url = "github:samuelludwig/composer2nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
     php-serenata-language-server = {
