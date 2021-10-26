@@ -9,6 +9,7 @@
     ripgrep
     sc-im # Terminal-based spreadsheets
     pandoc
+    xplr # File explorer TUI
     
     # Fonts
     texlive.combined.scheme-medium
