@@ -4,11 +4,15 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
+    # Tools
     unzip
     ripgrep
-    iosevka
+    sc-im # Terminal-based spreadsheets
     pandoc
+    
+    # Fonts
     texlive.combined.scheme-medium
+    iosevka
     corefonts
     vistafonts
     (callPackage ../../../custom/nonicons-ttf { })

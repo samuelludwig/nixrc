@@ -519,6 +519,10 @@ packer.startup(function()
         on_attach = on_attach_common,
       })
 
+      nvim_lsp.rnix.setup({
+        on_attach = on_attach_common,
+      })
+
       nvim_lsp.tsserver.setup({
         on_attach = function(client, bufnr)
           on_attach_common(client, bufnr)

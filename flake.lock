@@ -15,7 +15,6 @@
       },
       "original": {
         "owner": "samuelludwig",
-        "ref": "flakeify",
         "repo": "composer2nix",
         "type": "github"
       }
@@ -137,7 +136,6 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "nixpkgs": [
-          "neovim-nightly-overlay",
           "nixpkgs"
         ]
       },
@@ -280,16 +278,16 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1635173566,
-        "narHash": "sha256-nw3nzQwjZXP3n91OjZlRPv8OcQimPLmgt731q7dcqro=",
+        "lastModified": 1635249309,
+        "narHash": "sha256-yKYg5K4oiGW0kgmVtQigxB3yeJiY6s/WDH3P/8d7YWk=",
         "owner": "samuelludwig",
-        "repo": "node2nix-flake",
-        "rev": "78e60b14c8d59c331742c0cafcd27cf39d1ebb20",
+        "repo": "node2nix",
+        "rev": "29c96b5064381232518404122af09e22b619dabc",
         "type": "github"
       },
       "original": {
         "owner": "samuelludwig",
-        "repo": "node2nix-flake",
+        "repo": "node2nix",
         "type": "github"
       }
     },
@@ -330,11 +328,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1635128221,
-        "narHash": "sha256-6433FI4YuG/CUccoVQQ4Rd70K9cKOy1+NwoENRXeP+U=",
+        "lastModified": 1635214450,
+        "narHash": "sha256-kGHR8PbNNZswYVLn1DSGRaI75xx5lNqZwYCtm4EPU5A=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "f977b1f50d54e80b8efdc516b62a4e3c7987e012",
+        "rev": "fb8b1172e450433c59d8cb4c6e2a3e19c78dff4f",
         "type": "github"
       },
       "original": {

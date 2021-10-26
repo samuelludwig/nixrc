@@ -15,6 +15,7 @@ let
     nodePackages.yaml-language-server
     nodePackages.vscode-json-languageserver
     nodePackages.pyright
+    rnix-lsp
     sumneko-lua-language-server
     (callPackage ./intelephense { inherit pkgs; }).intelephense
   ];
