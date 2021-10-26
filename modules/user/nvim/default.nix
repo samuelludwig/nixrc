@@ -6,7 +6,7 @@ let
 
   # Not currently working :(
   #phpLS = { name = "php-serenata-language-server"; src = inputs.php-serenata-language-server; };
-  #phpLS = (pkgs.callPackage ./intelephense-nix { });
+  phpLS = (callPackage ./intelephense { inherit pkgs; }).intelephense;
 
   languageServers = with pkgs; [
     nodePackages.typescript-language-server
@@ -17,7 +17,7 @@ let
     nodePackages.pyright
     rnix-lsp
     sumneko-lua-language-server
-    (callPackage ./intelephense { inherit pkgs; }).intelephense
+    phpLS
   ];
 
   formatters = with pkgs; [
