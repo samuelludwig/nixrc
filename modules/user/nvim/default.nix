@@ -6,7 +6,7 @@ let
 
   # Not currently working :(
   #phpLS = { name = "php-serenata-language-server"; src = inputs.php-serenata-language-server; };
-  phpLS = (callPackage ./intelephense { inherit pkgs; }).intelephense;
+  phpLS = (pkgs.callPackage ./intelephense { inherit pkgs; }).intelephense;
 
   languageServers = with pkgs; [
     nodePackages.typescript-language-server
@@ -17,11 +17,13 @@ let
     nodePackages.pyright
     rnix-lsp
     sumneko-lua-language-server
+    haskell-language-server
     phpLS
   ];
 
   formatters = with pkgs; [
     php80Packages.phpcbf
+    ormolu
     tree-sitter
     stylua
     nixfmt
@@ -45,6 +47,7 @@ let
     "nvim/parser/bash.so".source = "${ts.tree-sitter-bash}/parser";
     "nvim/parser/comment.so".source = "${ts.tree-sitter-comment}/parser";
     "nvim/parser/php.so".source = "${ts.tree-sitter-php}/parser";
+    "nvim/parser/haskell.so".source = "${ts.tree-sitter-haskell}/parser";
   };
 
 in {
