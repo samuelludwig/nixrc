@@ -8,7 +8,7 @@ in {
   home.packages = [ php psysh composer2nix ];
 
   #
-  # Link .ini files
+  # Link config files
   #
   xdg.configFile."psysh/config.php".source =
     mkLink.to "${modPath.user}/langs/php/psysh/config.php";

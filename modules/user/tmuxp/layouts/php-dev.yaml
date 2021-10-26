@@ -1,7 +1,16 @@
 session_name: php-dev
 windows:
 - window_name: dev window
+  focust: True
   layout: main-vertical
+  options:
+    main-pane-width: 200
   panes:
     - if command -v psysh &> /dev/null; then psysh; else echo "Psysh not found, skipping...";
     - nvim
+    - pane
+- window_name: experiment
+  layout: main-vertical
+  panes:
+    - pane
+    - pane

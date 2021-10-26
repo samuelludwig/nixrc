@@ -83,6 +83,7 @@
       # Terminal needs for every machine.
       coreModules = uMods [
         "core"
+        "fun"
         "dev-tools"
         "nvim"
         "tmux"
