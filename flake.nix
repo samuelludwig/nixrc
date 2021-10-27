@@ -84,6 +84,7 @@
       coreModules = uMods [
         "core"
         "fun"
+        "communication"
         "dev-tools"
         "nvim"
         "tmux"
