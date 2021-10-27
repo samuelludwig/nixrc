@@ -92,7 +92,7 @@
         "bashnonnixos"
         "fish"
         "starship"
-      ] ++ langMods [ "php" "python" "js" "elixir" "rust" "haskell" ];
+      ] ++ langMods [ "php" "python" "js" "elixir" "rust" "haskell" "unison" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
