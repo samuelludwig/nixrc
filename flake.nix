@@ -85,6 +85,7 @@
       # Terminal needs for every machine.
       coreModules = uMods [
         "core"
+        "cookiecutter"
         "fun"
         "communication"
         "dev-tools"
