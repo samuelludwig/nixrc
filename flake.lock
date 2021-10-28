@@ -1,5 +1,20 @@
 {
   "nodes": {
+    "cachix": {
+      "locked": {
+        "lastModified": 1634936048,
+        "narHash": "sha256-Zkleh6ICiWAwBw+FLIE1jXHfxojSQdcFE4UnaFr28bQ=",
+        "owner": "cachix",
+        "repo": "cachix",
+        "rev": "a8f2e351be103041188793fd4d5f39557ebc4dbb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cachix",
+        "repo": "cachix",
+        "type": "github"
+      }
+    },
     "composer2nix": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -310,6 +325,7 @@
     },
     "root": {
       "inputs": {
+        "cachix": "cachix",
         "composer2nix": "composer2nix",
         "fish-fasd": "fish-fasd",
         "home-manager": "home-manager",

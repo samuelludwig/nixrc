@@ -11,6 +11,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    cachix.url = "github:cachix/cachix";
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,6 +104,9 @@
           };
       };
 
+      cachixOverlay = final: prev: { cachix = inputs.cachix.defaultPackage; };
+
+      coreOverlays = system: [ cachixOverlay ];
       neovimOverlays =
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
       langOverlays = system: [
@@ -110,6 +115,7 @@
         node2nix.overlays.${system}
       ];
       developmentOverlays = system: neovimOverlays ++ (langOverlays system);
+      overlays = system: (coreOverlays system) ++ (developmentOverlays system);
 
       #
       # Defaults: change these as you'd like.
@@ -120,12 +126,12 @@
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
-        extraSpecialArgs = { inherit inputs linkConfig modPath; };
+        extraSpecialArgs = { inherit inputs linkConfig modPath system; };
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {
           imports = coreModules ++ uMods [ ] ++ sysMods [ ];
-          nixpkgs.overlays = (developmentOverlays system);
+          nixpkgs.overlays = (overlays system);
         };
       };
 
@@ -146,7 +152,7 @@
           system = "x86_64-linux";
           configuration = {
             imports = coreModules ++ uMods [ "kittynonnixos" ];
-            nixpkgs.overlays = (developmentOverlays system) ++ [ ];
+            nixpkgs.overlays = (overlays system) ++ [ ];
           };
         };
 
