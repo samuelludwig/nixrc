@@ -104,9 +104,10 @@
           };
       };
 
-      cachixOverlay = final: prev: { cachix = inputs.cachix.defaultPackage; };
+      cachixOverlay = system:
+        (final: prev: { cachix = inputs.cachix.defaultPackage.${system}; });
 
-      coreOverlays = system: [ cachixOverlay ];
+      coreOverlays = system: [ (cachixOverlay system) ];
       neovimOverlays =
         [ neovim-nightly-overlay.overlay telescope-fzf-native-overlay ];
       langOverlays = system: [

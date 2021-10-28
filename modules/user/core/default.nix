@@ -9,7 +9,7 @@ in {
 
   home.packages = with pkgs; [
     # Nix needs
-    cachix.${system}
+    cachix
 
     # Tools
     unzip
