@@ -41,10 +41,14 @@
       url = "github:guibou/nixGL";
       flake = false;
     };
+
+    copier = {
+      url = "github:samuelludwig/copier/p2n";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, ... }:
+    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, copier, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -85,9 +89,9 @@
       # Terminal needs for every machine.
       coreModules = uMods [
         "core"
-        "cookiecutter"
         "fun"
         "communication"
+        "copier"
         "dev-tools"
         "nvim"
         "tmux"
@@ -128,7 +132,7 @@
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
-        extraSpecialArgs = { inherit inputs linkConfig modPath system; };
+        extraSpecialArgs = { inherit inputs linkConfig modPath system copier; };
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {

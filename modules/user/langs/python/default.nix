@@ -1,3 +1,4 @@
-{ config, pkgs, libs, ... }: {
-  home.packages = [ pkgs.python3Full ];
+{ config, pkgs, libs, inputs, ... }: {
+  home.packages = [ pkgs.python3Full ]
+    ++ (with pkgs.python39Packages; [ pipx ]);
 }
