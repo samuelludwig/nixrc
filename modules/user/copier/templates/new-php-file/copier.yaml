@@ -1,0 +1,8 @@
+namespace:
+  type: str
+  help: What's the namespace this file will live in?
+
+fileName:
+  type: str
+  help: What's the name of the file?
+  default: core

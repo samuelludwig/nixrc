@@ -1,0 +1,18 @@
+username:
+  type: str
+  help: What's the username the project will be under?
+  default: dot
+
+projectName:
+  type: str
+  help: What's the name of the project?
+
+projectType:
+  type: str
+  help: Is this a "library", or a "project"?
+  default: project
+
+corefile:
+  type: str
+  help: What do you want the name of your core file to be?
+  default: core

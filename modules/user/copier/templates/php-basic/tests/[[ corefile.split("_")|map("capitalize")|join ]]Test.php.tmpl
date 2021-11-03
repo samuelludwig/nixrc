@@ -1,0 +1,19 @@
+<?php declare(strict_types=1); namespace [[ (projectName|replace('_', '-')).split('-')|map('capitalize')|join ]]\Test\[[ corefile.split('_')|map('capitalize')|join ]];
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/[[ corefile ]].php';
+use \Phprelude\Core as p;
+use \Phprelude\Optics\Lens as l;
+use \Phprelude\Enum;
+
+use \PHPUnit\Framework\TestCase;
+use \[[ (projectName|replace('_', '-')).split('-')|map('capitalize')|join ]]\[[ corefile.split('_')|map('capitalize')|join ]];
+
+class [[ corefile.split('_')|map('capitalize')|join ]]Test extends TestCase
+{
+
+    public function _test()
+    {
+        $this->assertEquals(true, false);
+    }
+}
+
