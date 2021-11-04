@@ -12,6 +12,7 @@ in {
     cachix
 
     # Tools
+    patchelf
     unzip
     ripgrep
     sc-im # Terminal-based spreadsheets
