@@ -1,4 +1,4 @@
-{ pkgs, config, lib, inputs, linkConfig, modPath, ... }: 
+{ pkgs, config, lib, inputs, linkConfig, modPath, ... }:
 let
   mkLink = linkConfig config;
   confRoot = "${modPath.user}/fish";
@@ -21,6 +21,10 @@ in {
       {
         name = "fasd";
         src = inputs.fish-fasd;
+      }
+      {
+        name = "fish-ssh-agent";
+        src = inputs.fish-ssh-agent;
       }
       {
         name = "z";

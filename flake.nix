@@ -28,6 +28,11 @@
       flake = false;
     };
 
+    fish-ssh-agent = {
+      url = "github:danhper/fish-ssh-agent";
+      flake = false;
+    };
+
     node2nix.url = "github:samuelludwig/node2nix";
     composer2nix.url = "github:samuelludwig/composer2nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -42,7 +47,7 @@
       flake = false;
     };
 
-    copier = { url = "github:samuelludwig/copier/p2n"; };
+    copier.url = "github:samuelludwig/copier/p2n";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
