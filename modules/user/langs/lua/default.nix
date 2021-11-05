@@ -1,10 +1,14 @@
 { pkgs, config, lib, linkConfig, modPath, inputs, ... }@args:
 let
-  #lua = pkgs.<luaVer>;
-  #luarocks = pkgs.<luarocksVer>;
+  luajit = pkgs.luajit;
   mkLink = linkConfig config;
 in {
-  #home.packages = [ lua luarocks ];
+  home.packages = with pkgs.luajitPackages; [
+    lua
+    luajit
+    luarocks-nix
+    busted
+  ];
 
   #
   # Link .ini files

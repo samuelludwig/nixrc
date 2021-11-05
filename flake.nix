@@ -42,13 +42,12 @@
       flake = false;
     };
 
-    copier = {
-      url = "github:samuelludwig/copier/p2n";
-    };
+    copier = { url = "github:samuelludwig/copier/p2n"; };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, copier, ... }:
+    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, copier, ...
+    }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -86,6 +85,17 @@
       langMods = modList: toMods "lang" modList;
       sysMods = modList: toMods "system" modList;
 
+      langModList = langMods [
+        "php"
+        "python"
+        "lua"
+        "js"
+        "elixir"
+        "rust"
+        "haskell"
+        "unison"
+      ];
+
       # Terminal needs for every machine.
       coreModules = uMods [
         "core"
@@ -99,7 +109,7 @@
         "bashnonnixos"
         "fish"
         "starship"
-      ] ++ langMods [ "php" "python" "js" "elixir" "rust" "haskell" "unison" ];
+      ] ++ langModList;
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
