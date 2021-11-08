@@ -1,0 +1,3 @@
+template-name:
+  type: str
+  help: What's will the name for this template be?
