@@ -22,7 +22,7 @@ let
   ];
 
   formatters = with pkgs; [
-    php80Packages.phpcs
+    php80Packages.phpcbf
     ormolu
     tree-sitter
     stylua
