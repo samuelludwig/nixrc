@@ -494,7 +494,7 @@ packer.startup(function()
           null_ls.builtins.formatting.isort.with({
             filetypes = { "python" },
           }),
-          null_ls.builtins.formatting.phpstan.with({
+          null_ls.builtins.formatting.phpcs.with({
             filetypes = { "php" },
           }),
         },
