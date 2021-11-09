@@ -1,1 +1,1 @@
-{ repoDir = "/home/dot/nixrc"; username = "dot"; homeDir = "/home/dot"; }
+{ repoDir = "/home/dot/workbench/nixrc"; username = "dot"; homeDir = "/home/dot"; }
