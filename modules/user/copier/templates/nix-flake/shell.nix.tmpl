@@ -1,0 +1,11 @@
+{ pkgs, devPackage }:
+pkgs.mkShell {
+  name = "[[ package-name ]]-devShell";
+  packages = with pkgs; [ devPackage ];
+  inputsFrom = [ devPackage ];
+
+  nativeBuildInputs = with pkgs; [
+      # hello cowsay
+  ];
+}
+

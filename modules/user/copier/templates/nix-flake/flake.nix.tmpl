@@ -1,0 +1,43 @@
+{
+  description = "[[ description ]]";
+
+  inputs = {
+    fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    #
+    # Package Repos
+    #
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    #nur.url = "github:nix-community/NUR";
+  };
+
+  outputs = inputs@{ self, nixpkgs, fup, ... }:
+    let
+      pkgs = import nixpkgs { };
+      inherit (fup.lib) mkFlake mkApp;
+      [[ package-name ]] = { };
+    in mkFlake {
+      inherit self inputs;
+
+      supportedSystems = [ "x86_64-linux" ];
+
+      overlay = (final: prev: { inherit [[ package-name ]]; });
+
+      sharedOverlays = [ overlay ];
+
+      outputsBulider = channels: {
+        inherit overlay;
+
+        packages.[[ package-name ]] = [[ package-name ]];
+        defaultPackage = packages.[[ package-name ]];
+
+        apps.[[ package-name ]] = mkApp { drv = packages.[[ package-name ]]; };
+        defaultApp = apps.[[ package-name ]];
+
+        devShell = import ./shell.nix { 
+          pkgs = channels.nixpkgs;
+          devPackage = [[ package-name ]];
+        };
+      };
+    };
+}

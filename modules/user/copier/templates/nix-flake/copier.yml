@@ -1,0 +1,8 @@
+package-name:
+  type: str
+  help: The name under which your package will be exposed
+
+description:
+  type: str
+  help: A brief description of your package
+  default: Lorem Ipsum
