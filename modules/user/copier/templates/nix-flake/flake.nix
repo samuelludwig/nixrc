@@ -1,4 +1,6 @@
 {
+  description = "";
+
   inputs = {
     fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
@@ -16,5 +18,7 @@
     let pkgs = nixpkgs.legacyPackages;
     in fup.lib.mkFlake {
       inherit self inputs;
+
+      outputsBulider = {};
     };
 }
