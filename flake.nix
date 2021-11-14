@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    copier-pkgs-preview.url = "github:jonringer/nixpkgs/package-copier";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -46,13 +47,11 @@
       url = "github:guibou/nixGL";
       flake = false;
     };
-
-    copier.url = "github:samuelludwig/copier/p2n";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
-    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix, copier, ...
-    }:
+    , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix
+    , copier-pkgs-preview, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = import ./metaInfo.nix;
@@ -147,7 +146,7 @@
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
-        extraSpecialArgs = { inherit inputs linkConfig modPath system copier; };
+        extraSpecialArgs = { inherit inputs linkConfig modPath system copier-pkgs-preview; };
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {

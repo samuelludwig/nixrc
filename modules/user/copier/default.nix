@@ -1,16 +1,15 @@
-{ pkgs, config, lib, linkConfig, modPath, inputs, copier, system, ... }@args:
+{ pkgs, config, lib, linkConfig, modPath, inputs, copier-pkgs-preview, system
+, ... }@args:
 let
   mkLink = linkConfig config;
   confRoot = "${modPath.user}/copier";
+  # Use normal `pkgs` once jonringer's pull request gets accepted into nixpkgs
+  copier = (import copier-pkgs-preview { inherit system; }).copier;
 in {
   # Blessed be jonringer and damned be python
-  #home.packages = [ pkgs.copier ];
+  home.packages = [ copier ];
 
-  # Hack referencing pipx-installed version of copier until jonringer's pull
-  # request is accepted into nixpkgs
+  # Ergonomic usage similar to cookiecutter
   programs.fish.functions.cop =
-    "~/.local/bin/copier ${confRoot}/templates/$argv[1] $argv[2]";
-
-  #programs.fish.functions.cop =
-  #  "copier ${confRoot}/templates/$argv[1] $argv[2]";
+    "copier ${confRoot}/templates/$argv[1] $argv[2]";
 }

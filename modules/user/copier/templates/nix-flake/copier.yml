@@ -1,4 +1,4 @@
-package-name:
+packageName:
   type: str
   help: The name under which your package will be exposed
 

@@ -15,28 +15,28 @@
     let
       pkgs = import nixpkgs { };
       inherit (fup.lib) mkFlake mkApp;
-      [[ package-name ]] = { };
+      [[ packageName ]] = { };
     in mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" ];
 
-      overlay = (final: prev: { inherit [[ package-name ]]; });
+      overlay = (final: prev: { inherit [[ packageName ]]; });
 
       sharedOverlays = [ overlay ];
 
       outputsBulider = channels: {
         inherit overlay;
 
-        packages.[[ package-name ]] = [[ package-name ]];
-        defaultPackage = packages.[[ package-name ]];
+        packages.[[ packageName ]] = [[ packageName ]];
+        defaultPackage = packages.[[ packageName ]];
 
-        apps.[[ package-name ]] = mkApp { drv = packages.[[ package-name ]]; };
-        defaultApp = apps.[[ package-name ]];
+        apps.[[ packageName ]] = mkApp { drv = packages.[[ packageName ]]; };
+        defaultApp = apps.[[ packageName ]];
 
         devShell = import ./shell.nix { 
           pkgs = channels.nixpkgs;
-          devPackage = [[ package-name ]];
+          devPackage = [[ packageName ]];
         };
       };
     };
