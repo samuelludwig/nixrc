@@ -10,6 +10,7 @@ in {
   home.packages = [ copier ];
 
   # Ergonomic usage similar to cookiecutter
+  home.file.".copier-templates".source = mkLink.to "${confRoot}/templates";
   programs.fish.functions.cop =
-    "copier ${confRoot}/templates/$argv[1] $argv[2]";
+    "copier ~/.copier-templates/$argv[1] $argv[2]";
 }
