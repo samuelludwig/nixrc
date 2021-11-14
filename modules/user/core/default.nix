@@ -29,6 +29,7 @@ in {
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
   home.sessionVariables = { TERM = "xterm-256color"; };
   #xdg.configFile."nix/nix.conf".source = mkLink.to "${confRoot}/nix.conf";
 }
