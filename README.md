@@ -48,7 +48,7 @@ home-manager config.
 These can all be found/modified in `flake.nix`:
 
 - `linux-server` <- Just some terminal apps, a safe enough start
-- `garuda-desktop` <- Untested
+- `garuda-desktop` <- `linux-server` + some configs for non-terminal-bound apps
 - `nixos-desktop` <- Untested
 
 ## Module philosophy
