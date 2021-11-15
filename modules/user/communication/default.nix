@@ -1,9 +1,18 @@
-{ config, pkgs, libs, ... }: {
+{ config, pkgs, libs, ... }: 
+let
+  wcs = pkgs.weechatScripts;
+in
+{
   home.packages = with pkgs; [
     # CLI
     telegram-cli
+
+    # Weechat
     weechat
-    weechatScripts.weechat-matrix
+    wcs.weechat-matrix
+    wcs.colorize_nicks
+    wcs.edit
+
     matrix-commander
   ];
 }
