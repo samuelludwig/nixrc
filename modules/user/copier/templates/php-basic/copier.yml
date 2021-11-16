@@ -1,4 +1,4 @@
-username:
+authorName:
   type: str
   help: What's the username the project will be under?
   default: dot
@@ -11,6 +11,9 @@ projectType:
   type: str
   help: Is this a "library", or a "project"?
   default: project
+  choices:
+    - library
+    - project
 
 corefile:
   type: str

@@ -1,2 +1,2 @@
 #!/bin/sh
-pipx install copier
+#pipx install copier

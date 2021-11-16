@@ -1,0 +1,19 @@
+<?php declare(strict_types=1); namespace {{ namespace }}\Test\{{ fileName.split('_')|map('capitalize')|join }};
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/{{ fileName }}.php';
+use \Phprelude\Core as p;
+use \Phprelude\Optics\Lens as l;
+use \Phprelude\Enum;
+
+use \PHPUnit\Framework\TestCase;
+use \{{ namespace }}\{{ fileName.split('_')|map('capitalize')|join }};
+
+class {{ fileName.split('_')|map('capitalize')|join }}Test extends TestCase
+{
+
+    public function _test()
+    {
+        $this->assertEquals(true, false);
+    }
+}
+
