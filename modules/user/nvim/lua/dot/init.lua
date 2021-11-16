@@ -15,6 +15,14 @@ packer.startup(function()
     "wbthomason/packer.nvim",
   })
 
+  -- vimwiki
+  use({
+    "vimwiki/vimwiki",
+    "junegunn/fzf",
+    "junegunn/fzf.vim",
+    "michal-h21/vim-zettel",
+  })
+
   use({
     "tpope/vim-commentary",
     "tpope/vim-fugitive",

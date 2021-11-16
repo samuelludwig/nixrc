@@ -63,6 +63,10 @@ in {
 
   programs.fish = {
     shellAliases.n = "nvim -O";
+    shellAliases.sc = ''
+      git -C ~/vimwiki pull && git -C ~/vimwiki add . && \
+        git -C ~/vimwiki commit -m 'Update Core'&& git -C ~/vimwiki push -u \
+    '';
     shellInit = ''
       set -gx EDITOR nvim
     '';
