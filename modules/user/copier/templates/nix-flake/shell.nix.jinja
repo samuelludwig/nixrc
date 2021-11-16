@@ -1,6 +1,6 @@
 { pkgs, devPackage }:
 pkgs.mkShell {
-  name = "[[ packageName ]]-devShell";
+  name = "{{ packageName }}-devShell";
   packages = with pkgs; [ devPackage ];
   inputsFrom = [ devPackage ];
 

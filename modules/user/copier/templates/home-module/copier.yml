@@ -4,7 +4,11 @@ module-name:
 
 module-type:
   type: str
-  help: Type of the module (user or lang)
+  help: Type of the module
+  choices:
+    - user
+    - lang
+    - system
   default: user
 
 xdg-config-location:

@@ -1,5 +1,5 @@
 {
-  description = "[[ description ]]";
+  description = "{{ description }}";
 
   inputs = {
     fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
@@ -15,28 +15,28 @@
     let
       pkgs = import nixpkgs { };
       inherit (fup.lib) mkFlake mkApp;
-      [[ packageName ]] = { };
+      {{ packageName }} = { };
     in mkFlake {
       inherit self inputs;
 
       supportedSystems = [ "x86_64-linux" ];
 
-      overlay = (final: prev: { inherit [[ packageName ]]; });
+      overlay = (final: prev: { inherit {{ packageName }}; });
 
       sharedOverlays = [ overlay ];
 
       outputsBulider = channels: {
         inherit overlay;
 
-        packages.[[ packageName ]] = [[ packageName ]];
-        defaultPackage = packages.[[ packageName ]];
+        packages.{{ packageName }} = {{ packageName }};
+        defaultPackage = packages.{{ packageName }};
 
-        apps.[[ packageName ]] = mkApp { drv = packages.[[ packageName ]]; };
-        defaultApp = apps.[[ packageName ]];
+        apps.{{ packageName }} = mkApp { drv = packages.{{ packageName }}; };
+        defaultApp = apps.{{ packageName }};
 
         devShell = import ./shell.nix { 
           pkgs = channels.nixpkgs;
-          devPackage = [[ packageName ]];
+          devPackage = {{ packageName }};
         };
       };
     };
