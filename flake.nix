@@ -113,6 +113,7 @@
         "bashnonnixos"
         "fish"
         "starship"
+        "gitea"
       ] ++ langModList;
 
       # Currently scuffed sadsad
