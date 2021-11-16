@@ -15,7 +15,8 @@ in {
     patchelf
     unzip
     ripgrep
-    sc-im # Terminal-based spreadsheets
+    sc-im    # Terminal-based spreadsheets
+    visidata # 
     pandoc
     xplr # File explorer TUI
 

@@ -1,0 +1,12 @@
+{ pkgs, config, lib, linkConfig, modPath, inputs, ... }@args:
+let
+  mkLink = linkConfig config;
+  confRoot = "${modPath.{{ moduleType }}}/{{ moduleName }}/configs";
+in {
+  home.packages = with pkgs; [];
+
+  #
+  # Config files
+  #
+  #xdg.configFile."{{ xdgConfigLocation }}".source = mkLink.to "${confRoot}/";
+}

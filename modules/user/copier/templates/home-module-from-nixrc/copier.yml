@@ -1,0 +1,17 @@
+moduleName:
+  type: str
+  help: Name of the module
+
+moduleType:
+  type: str
+  help: Type of the module
+  choices:
+    - user
+    - lang
+    - system
+  default: user
+
+xdgConfigLocation:
+  type: str
+  help: Where XDG configs are typically stored for this module on a non-nix system
+  default: ""
