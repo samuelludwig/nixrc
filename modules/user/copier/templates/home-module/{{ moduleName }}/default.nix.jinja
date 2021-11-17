@@ -1,4 +1,4 @@
-{ pkgs, config, lib, linkConfig, modPath, meta, inputs, ... }@args:
+{ pkgs, config, lib, linkConfig, modPath, inputs, meta, ... }@args:
 let
   mkLink = linkConfig config;
   confRoot = "${modPath.{{ moduleType }}}/{{ moduleName }}/config";

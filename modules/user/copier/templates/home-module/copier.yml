@@ -1,8 +1,8 @@
-module-name:
+moduleName:
   type: str
   help: Name of the module
 
-module-type:
+moduleType:
   type: str
   help: Type of the module
   choices:
@@ -11,7 +11,7 @@ module-type:
     - system
   default: user
 
-xdg-config-location:
+xdgConfigLocation:
   type: str
   help: Where XDG configs are typically stored for this module on a non-nix system
   default: ""

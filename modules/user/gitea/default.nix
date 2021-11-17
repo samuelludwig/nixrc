@@ -8,5 +8,5 @@ in {
   #
   # Config files
   #
-  #xdg.configFile."".source = mkLink.to "${confRoot}/";
+  xdg.configFile."tea".source = mkLink.to "${confRoot}/tea";
 }
