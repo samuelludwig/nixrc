@@ -6,17 +6,6 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd("packadd packer.nvim")
 end
 
-function Merge(t1, t2)
-    for k, v in pairs(t2) do
-        if (type(v) == "table") and (type(t1[k] or false) == "table") then
-            Merge(t1[k], t2[k])
-        else
-            t1[k] = v
-        end
-    end
-    return t1
-end
-
 -- packer
 local packer = require("packer")
 local use = packer.use
@@ -29,10 +18,17 @@ packer.startup(function()
   -- vimwiki
   use({
     "vimwiki/vimwiki",
-    "junegunn/fzf",
-    "junegunn/fzf.vim",
-    "michal-h21/vim-zettel",
   })
+
+  -- use({
+  --   "michal-h21/vim-zettel",
+  --   requires = {
+  --     "junegunn/fzf",
+  --     "junegunn/fzf.vim",
+  --   },
+  --   config = function()
+  --   end
+  -- })
 
   use({
     "tpope/vim-commentary",
