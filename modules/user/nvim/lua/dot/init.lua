@@ -6,6 +6,17 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd("packadd packer.nvim")
 end
 
+function Merge(t1, t2)
+    for k, v in pairs(t2) do
+        if (type(v) == "table") and (type(t1[k] or false) == "table") then
+            Merge(t1[k], t2[k])
+        else
+            t1[k] = v
+        end
+    end
+    return t1
+end
+
 -- packer
 local packer = require("packer")
 local use = packer.use
@@ -290,12 +301,12 @@ packer.startup(function()
 
       telescope.setup({
         pickers = {
-          find_files = { disable_devicons = true },
-          buffers = { disable_devicons = true },
-          oldfiles = { disable_devicons = true },
-          grep_string = { disable_devicons = true },
-          live_grep = { disable_devicons = true },
-          file_browser = { disable_devicons = true },
+          find_files = { disable_devicons = true, theme = "ivy" },
+          buffers = { disable_devicons = true, theme = "ivy" },
+          oldfiles = { disable_devicons = true, theme = "ivy" },
+          grep_string = { disable_devicons = true, theme = "ivy" },
+          live_grep = { disable_devicons = true, theme = "ivy" },
+          file_browser = { disable_devicons = true, theme = "ivy" },
         },
         --       extensions = {
         --         fzf = {
@@ -311,61 +322,67 @@ packer.startup(function()
       vim.api.nvim_set_keymap(
         "n",
         "<leader><leader>",
-        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').find_files()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>fh",
-        "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_ivy({ hidden = true }))<cr>",
+        "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>fr",
-        "<cmd>lua require('telescope.builtin').oldfiles(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').oldfiles()<cr>",
+        { noremap = true, silent = true }
+      )
+      vim.api.nvim_set_keymap(
+        "n",
+        "<leader>fi",
+        "<cmd>lua require('telescope.builtin').live_grep({ cwd = '~/vimwiki' })<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>bb",
-        "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').buffers()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>g",
-        "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').live_grep()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>ff",
-        "<cmd>lua require('telescope.builtin').file_browser(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').file_browser()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>vc",
-        "<cmd>lua require('telescope.builtin').git_commits(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').git_commits()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>vb",
-        "<cmd>lua require('telescope.builtin').git_branches(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').git_branches()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>sdd",
-        "<cmd>lua require('telescope.builtin').lsp_document_diagnostics(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>",
         { noremap = true, silent = true }
       )
       vim.api.nvim_set_keymap(
         "n",
         "<leader>sdw",
-        "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics(require('telescope.themes').get_ivy())<cr>",
+        "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>",
         { noremap = true, silent = true }
       )
     end,
