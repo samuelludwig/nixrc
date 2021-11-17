@@ -1,4 +1,4 @@
-{ pkgs, config, lib, inputs, linkConfig, modPath, ... }:
+{ pkgs, config, lib, inputs, linkConfig, modPath, meta, ... }@args:
 let
   mkLink = linkConfig config;
   confRoot = "${modPath.user}/fish";
@@ -12,9 +12,13 @@ in {
       gs = "lazygit";
       ".." = "cd ..";
       "..." = "cd ../..";
+      "...." = "cd ../../..";
+      "....." = "cd ../../../..";
       nf = "nix flake";
       nb = "nix build";
       re = "nix repl";
+      rc = "cd ${meta.repoDir}";
+      umods = "cd ${meta.repoDir}/${modPath.user}";
     };
 
     plugins = [

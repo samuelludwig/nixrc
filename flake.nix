@@ -147,7 +147,7 @@
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
-        extraSpecialArgs = { inherit inputs linkConfig modPath system copier-pkgs-preview; };
+        extraSpecialArgs = { inherit inputs linkConfig modPath system copier-pkgs-preview meta; };
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {
