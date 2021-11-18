@@ -22,6 +22,7 @@ let
   ];
 
   formatters = with pkgs; [
+    fzf
     php80Packages.phpcbf
     ormolu
     tree-sitter
@@ -100,7 +101,7 @@ in {
   # Acutal config files
   #
   xdg.configFile = {
-    "nvim/lua/dot/init.lua".source = mkLink.to "${confRoot}/lua/dot/init.lua";
+    "nvim/lua/dot".source = mkLink.to "${confRoot}/lua/dot";
     "nvim/ftplugin/markdown.vim".source =
       mkLink.to "${confRoot}/ftpludin/markdown.vim";
   } // treesitterParsers;

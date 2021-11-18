@@ -1,9 +1,18 @@
+--require('packer-bootstrap')
 -- packer bootstrap
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
   fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
   vim.cmd("packadd packer.nvim")
+end
+
+
+local nnoremap = function(bind, cmd)
+      vim.api.nvim_set_keymap("n", bind, cmd, { noremap = true, silent = true })
+end
+local nmap = function(bind, cmd)
+      vim.api.nvim_set_keymap("n", bind, cmd, { silent = true })
 end
 
 -- packer
@@ -18,17 +27,26 @@ packer.startup(function()
   -- vimwiki
   use({
     "vimwiki/vimwiki",
+    config = function()
+      -- Autopopulate the header of every new vimwiki file
+      vim.g.vimwiki_auto_header = 1
+      -- Convenient splits
+      nmap("<Leader>we", "<Plug>VimwikiSplitLink")
+      nmap("<Leader>wq", "<Plug>VimwikiVSplitLink")
+      -- Easy access to my buffer file
+      nmap("<Leader>c", ":split ~/vimwiki/Buffer.wiki<Enter>")
+    end
   })
 
-  -- use({
-  --   "michal-h21/vim-zettel",
-  --   requires = {
-  --     "junegunn/fzf",
-  --     "junegunn/fzf.vim",
-  --   },
-  --   config = function()
-  --   end
-  -- })
+  use({
+    "michal-h21/vim-zettel",
+    requires = {
+      "junegunn/fzf",
+      "junegunn/fzf.vim",
+    },
+    config = function()
+    end
+  })
 
   use({
     "tpope/vim-commentary",
