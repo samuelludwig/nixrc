@@ -68,12 +68,15 @@ in {
       git -C ~/vimwiki pull && git -C ~/vimwiki add . && \
         git -C ~/vimwiki commit -m 'Update Core'&& git -C ~/vimwiki push -u \
     '';
+    shellAliases.c = ''
+      nvim ~/vimwiki/Buffer.wiki
+    '';
     shellInit = ''
       set -gx EDITOR nvim
     '';
   };
 
-  home.packages = with pkgs; [ ] ++ formatters ++ languageServers;
+  home.packages = with pkgs; [] ++ formatters ++ languageServers;
 
   # Required for lang-servers
   home.file.".npmrc".text = ''
@@ -89,9 +92,10 @@ in {
     withNodeJs = true;
     withPython3 = true;
     extraConfig = ''
-      lua require('dot')
+      lua require('init')
     '';
   };
+  
 
   # Do the requisite black magic for telescope-fzf
   xdg.dataFile."nvim/site/pack/packer/start/telescope-fzf-native.nvim/build/libfzf.so".source =
@@ -101,7 +105,10 @@ in {
   # Acutal config files
   #
   xdg.configFile = {
-    "nvim/lua/dot".source = mkLink.to "${confRoot}/lua/dot";
+    "nvim/lua" = {
+      source = mkLink.to "${confRoot}/lua/dot";
+      recursive = true;
+    };
     "nvim/ftplugin/markdown.vim".source =
       mkLink.to "${confRoot}/ftpludin/markdown.vim";
   } // treesitterParsers;
