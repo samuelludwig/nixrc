@@ -54,7 +54,7 @@
     , copier-pkgs-preview, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
-      meta = import ./metaInfo.nix;
+      meta = builtins.fromTOML (builtins.readFile ./metaInfo.toml);
 
       # Utility to let us symlink and un-symlink our non-nix config files on
       # demand.
