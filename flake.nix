@@ -76,10 +76,12 @@
       # modules.
       modPath = {
         user = "modules/user"; # For user-specific configs
-        lang = "modules/user/langs"; # For programming-language-specific configs
+        lang = "modules/lang"; # For programming-language-specific configs
         system = "modules/system"; # For system-wide configs
         # ^^^^ usually firmware/driver/hardware-related.
       };
+
+      merge = nixpkgs.lib.recursiveUpdate;
 
       # This (./. + "path") is the only way to get nix to not complain about
       # our string paths not being absolute.
@@ -90,6 +92,7 @@
       sysMods = modList: toMods "system" modList;
 
       langModList = langMods [
+        "dhall"
         "php"
         "python"
         "lua"
@@ -147,7 +150,9 @@
       hmConfDefaults = rec {
         system = "x86_64-linux";
         stateVersion = "21.05";
-        extraSpecialArgs = { inherit inputs linkConfig modPath system copier-pkgs-preview meta; };
+        extraSpecialArgs = {
+          inherit inputs linkConfig modPath system copier-pkgs-preview meta;
+        };
         username = meta.username;
         homeDirectory = meta.homeDir;
         configuration = {
@@ -160,10 +165,11 @@
       # We want to actually define our configs with this function.
       #
       mkHMConf = user: attrs:
-        home-manager.lib.homeManagerConfiguration (hmConfDefaults // {
+        home-manager.lib.homeManagerConfiguration
+        (merge (merge hmConfDefaults {
           username = user;
           homeDirectory = "/home/${user}";
-        } // attrs);
+        }) attrs);
 
     in {
       homeManagerConfigurations = {
