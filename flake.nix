@@ -38,6 +38,8 @@
     composer2nix.url = "github:samuelludwig/composer2nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
+    nickel.url = "github:tweag/nickel";
+
     nixGL = {
       url = "github:guibou/nixGL";
       flake = false;
@@ -46,7 +48,7 @@
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixos-hardware
     , neovim-nightly-overlay, rust-overlay, node2nix, composer2nix
-    , copier-pkgs-preview, ... }:
+    , copier-pkgs-preview, nickel, ... }:
     let
       # Import attrs generated from running the `init-repo.sh` script.
       meta = builtins.fromTOML (builtins.readFile ./metaInfo.toml);
@@ -93,13 +95,14 @@
 
       langModList = langMods [
         "dhall"
+        "elixir"
+        "haskell"
+        "lua"
+        "nickel"
         "php"
         "python"
-        "lua"
         "js"
-        "elixir"
         "rust"
-        "haskell"
         "unison"
       ];
 
@@ -131,6 +134,8 @@
       #
       # OVERLAYS
       #
+      nickelOverlay = system:
+        (final: prev: { nickel = nickel.defaultPackage.${system}; });
       cachixOverlay = system:
         (final: prev: { cachix = inputs.cachix.defaultPackage.${system}; });
 
@@ -141,6 +146,7 @@
         rust-overlay.overlay
         composer2nix.overlays.${system}
         node2nix.overlays.${system}
+        (nickelOverlay system)
       ];
       developmentOverlays = system: neovimOverlays ++ (langOverlays system);
       overlays = system: (coreOverlays system) ++ (developmentOverlays system);
