@@ -29,6 +29,15 @@ packer.startup(function()
       "junegunn/fzf.vim",
     },
     config = function()
+      vim.g.zettel_fzf_command =
+        "rg --column --line-number --ignore-case --no-heading --color=always "
+      vim.g.nv_search_paths = { '~/vimwiki' }
+      --- TITLES ---
+      -- Change timestamp format to a 4-digit year
+      --vim.g.zettel_format = "%Y%m%d%H%M-%title"
+
+      -- Change timestamp format to a 4-digit year and use ID-only for filenames
+      vim.g.zettel_format = "%Y%m%d%H%M"
     end
   })
 
