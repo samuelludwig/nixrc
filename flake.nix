@@ -106,6 +106,7 @@
       # Terminal needs for every machine.
       coreModules = uMods [
         "core"
+        "espanso"
         "fun"
         "communication"
         "copier"
