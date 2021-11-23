@@ -339,22 +339,6 @@
         "type": "github"
       }
     },
-    "php-serenata-language-server": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1614968467,
-        "narHash": "sha256-8UOIpaz9XIzgpIaOeolPAvKEbLt9H9/N80qwHDFPBEY=",
-        "owner": "Serenata",
-        "repo": "Serenata",
-        "rev": "d3c9dcb3426a9b5ffe442a436e2179063ea6c9d7",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "Serenata",
-        "repo": "Serenata",
-        "type": "gitlab"
-      }
-    },
     "root": {
       "inputs": {
         "cachix": "cachix",
@@ -368,7 +352,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "node2nix": "node2nix",
-        "php-serenata-language-server": "php-serenata-language-server",
         "rust-overlay": "rust-overlay",
         "telescope-fzf-native": "telescope-fzf-native"
       }

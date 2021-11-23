@@ -38,11 +38,6 @@
     composer2nix.url = "github:samuelludwig/composer2nix";
     rust-overlay.url = "github:oxalica/rust-overlay";
 
-    php-serenata-language-server = {
-      url = "gitlab:Serenata/Serenata";
-      flake = false;
-    };
-
     nixGL = {
       url = "github:guibou/nixGL";
       flake = false;
@@ -72,6 +67,10 @@
             "${flakeRoot}/${path}";
       };
 
+      #
+      # MODULES
+      #
+
       # Where, relative to the root of the flake, we can access our config
       # modules.
       modPath = {
@@ -81,7 +80,8 @@
         # ^^^^ usually firmware/driver/hardware-related.
       };
 
-      merge = nixpkgs.lib.recursiveUpdate;
+      merge2 = nixpkgs.lib.recursiveUpdate;
+      merge3 = x: y: z: merge2 (merge2 x y) z;
 
       # This (./. + "path") is the only way to get nix to not complain about
       # our string paths not being absolute.
@@ -127,6 +127,9 @@
           };
       };
 
+      #
+      # OVERLAYS
+      #
       cachixOverlay = system:
         (final: prev: { cachix = inputs.cachix.defaultPackage.${system}; });
 
@@ -142,7 +145,7 @@
       overlays = system: (coreOverlays system) ++ (developmentOverlays system);
 
       #
-      # Defaults: change these as you'd like.
+      # DEFAULTS: change these as you'd like.
       #
       stdUser = meta.username;
       stdTestUser = "${stdUser}-test";
@@ -161,17 +164,17 @@
         };
       };
 
-      #
       # We want to actually define our configs with this function.
-      #
       mkHMConf = user: attrs:
-        home-manager.lib.homeManagerConfiguration
-        (merge (merge hmConfDefaults {
+        home-manager.lib.homeManagerConfiguration (merge3 hmConfDefaults {
           username = user;
           homeDirectory = "/home/${user}";
-        }) attrs);
+        } attrs);
 
     in {
+      #
+      # CONFIGS
+      #
       homeManagerConfigurations = {
 
         # My home machine
