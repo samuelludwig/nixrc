@@ -1,11 +1,15 @@
 -- packer bootstrap
-require('packer-bootstrap')
+require("packer-bootstrap")
 
 -- packer
 local packer = require("packer")
 local use = packer.use
 
 packer.startup(function()
+  local nmap = function(bind, cmd)
+    vim.api.nvim_set_keymap("n", bind, cmd, { silent = true })
+  end
+
   use({
     "wbthomason/packer.nvim",
   })
@@ -19,7 +23,7 @@ packer.startup(function()
   })
   -- Configs for vimwiki, it breakes when its included in either config or
   -- setup, but whyyyy???
-  require('modules.vimwiki')
+  require("modules.vimwiki")
 
   use({
     "michal-h21/vim-zettel",
@@ -29,17 +33,35 @@ packer.startup(function()
       "junegunn/fzf.vim",
     },
     config = function()
-      vim.g.zettel_fzf_command =
-        "rg --column --line-number --ignore-case --no-heading --color=always "
-      vim.g.nv_search_paths = { '~/vimwiki' }
+      vim.g.zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always "
+      vim.g.nv_search_paths = { "~/vimwiki" }
       --- TITLES ---
       -- Change timestamp format to a 4-digit year
       --vim.g.zettel_format = "%Y%m%d%H%M-%title"
 
       -- Change timestamp format to a 4-digit year and use ID-only for filenames
       vim.g.zettel_format = "%Y%m%d%H%M"
-    end
+    end,
   })
+
+  use({
+    "ElPiloto/telescope-vimwiki.nvim",
+    enable = false,
+    requires = {
+      "vimwiki/vimwiki",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("vw")
+      --nmap("<leader>vw", require("telescope").extensions.vw.vw())
+      --nmap("<leader>vg", require("telescope").extensions.vw.live_grep())
+    end,
+  })
+  -- what?
+  vim.cmd([[
+    nnoremap <leader>vw <cmd>lua require('telescope').extensions.vw.vw()<cr>
+    nnoremap <leader>vg <cmd>lua require('telescope').extensions.vw.live_grep()<cr>
+  ]])
 
   use({
     "tpope/vim-commentary",
@@ -71,7 +93,7 @@ packer.startup(function()
   use({
     "NTBBloodbath/galaxyline.nvim",
     config = function()
-      require('modules.galaxyline')
+      require("modules.galaxyline")
     end,
   })
 
@@ -140,13 +162,17 @@ packer.startup(function()
   use({ "shaunsingh/nord.nvim" })
   use({
     "shaunsingh/moonlight.nvim",
-    config = function() require('colorschemes.moonlight') end,
+    config = function()
+      require("colorschemes.moonlight")
+    end,
   })
   use({ "kamwitsta/flatwhite-vim" })
   use({ "navarasu/onedark.nvim" })
   use({
     "ishan9299/nvim-solarized-lua",
-    config = function() require('colorschemes.nvim-solarized-lua') end,
+    config = function()
+      require("colorschemes.nvim-solarized-lua")
+    end,
   })
 
   --
@@ -156,7 +182,9 @@ packer.startup(function()
   use({
     "nvim-telescope/telescope.nvim",
     requires = { "nvim-telescope/telescope-fzf-native.nvim" },
-    config = function() require('modules.telescope') end,
+    config = function()
+      require("modules.telescope")
+    end,
   })
 
   use({
@@ -184,7 +212,9 @@ packer.startup(function()
       "jose-elias-alvarez/nvim-lsp-ts-utils",
       "jose-elias-alvarez/null-ls.nvim",
     },
-    config = function() require('modules.nvim-lspconfig') end,
+    config = function()
+      require("modules.nvim-lspconfig")
+    end,
   })
 
   use({
