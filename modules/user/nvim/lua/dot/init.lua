@@ -54,8 +54,8 @@ augroup Terminal
 augroup end
 ]])
 
---require("colorbuddy").colorscheme("gruvbuddy")
-vim.cmd('colorscheme vim-earl-grey')
+require("colorbuddy").colorscheme("gruvbuddy")
+--vim.cmd('colorscheme vim-earl-grey')
 vim.cmd([[
   hi MatchParen gui=underline
   hi StatusLine guibg=NONE
