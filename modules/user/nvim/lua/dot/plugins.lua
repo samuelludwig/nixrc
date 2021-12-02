@@ -123,8 +123,15 @@ packer.startup(function()
   use({ "sainnhe/everforest" })
   use({ "sainnhe/gruvbox-material" })
   use({ "Th3Whit3Wolf/space-nvim" })
+  use({ "Th3Whit3Wolf/onebuddy" })
+  use({ "jacoborus/tender.vim" })
+  use({ "owickstrom/vim-colors-paramount" })
+  --use({ "rj-white/vim-colors-paramountblue" }) -- not real??
+  use({ "https://gitlab.com/yorickpeterse/vim-paper.git" })
+  use({ "huyvohcmc/atlas.vim" })
   use({ "ray-x/aurora" })
   use({ "tanvirtin/monokai.nvim" })
+  use({ "cseelus/vim-colors-lucid" })
   use({
     "maaslalani/nordbuddy",
     config = function()
