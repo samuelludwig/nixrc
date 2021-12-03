@@ -1,5 +1,5 @@
 local M = {}
-require 'fun'()
+require("fun")()
 
 -- A valid module file should export a table of
 -- SETUP: A typical standalone lambda that should be run for setup/use of the
@@ -45,31 +45,48 @@ end
 M.load_all = function(dir, except) end
 
 M.activate_all = function(modules)
-  local setups = { }
-  local pkgs = { }
-  local configs = { }
-  local exports = { }
-  for modName in modules do 
+  local setups = {}
+  local pkgs = {}
+  local configs = {}
+  local exports = {}
+  for modName in modules do
     local mod = require(modName)
-    if mod['setup'] ~= nil then setups = concat(setups, mod['setup']) end
-    if mod['packages'] ~= nil then pkgs = concat(pkgs, mod['packages']) end
-    if mod['configs'] ~= nil then configs = concat(configs, mod['configs']) end
-    if mod['exports'] ~= nil then exports[modName] = mod['exports'] end
+    if mod["setup"] ~= nil then
+      setups = concat(setups, mod["setup"])
+    end
+    if mod["packages"] ~= nil then
+      pkgs = concat(pkgs, mod["packages"])
+    end
+    if mod["configs"] ~= nil then
+      configs = concat(configs, mod["config"])
+    end
+    if mod["exports"] ~= nil then
+      exports[modName] = mod["exports"]
+    end
   end
 
   -- Run setups
-  for lambda in setups do lambda() end
+  for lambda in setups do
+    lambda()
+  end
 
   -- Configure packages, need packer
-  require('packer').start({
-    map(function(x) do use(x) end, pkgs)
-  })
+  local packer = require("packer")
+  packer.startup(function()
+    map(function(x)
+      packer.use(x)
+    end, pkgs)
+  end)
 
   -- Run configs
-  for lambda in configs do lambda() end
+  for lambda in configs do
+    lambda()
+  end
 
   -- Place exports into the global table
-  for k, v in pairs( require(exports) ) do _G[k] = v end
+  for k, v in pairs(exports) do
+    _G[k] = v
+  end
   -- merge module fields
   -- 1. run all setups
   -- 2. merge packages into one table and then call `use` on all of them in a
