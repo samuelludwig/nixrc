@@ -123,6 +123,18 @@
         "gitea"
       ] ++ langModList;
 
+      slimModules = uMods [
+        "core"
+        "nvim"
+        "tmux"
+        "tmuxp"
+        "copier"
+        "fish"
+        "starship"
+        "bashnonnixos"
+        "dev-tools"
+      ] ++ langMods [ "php" "lua" "python" ];
+
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
         telescope-fzf-native =
@@ -198,6 +210,11 @@
         # experience. This can be used anywhere you just want to have your
         # terminal-bound-apps-and-data managed.
         linux-server = mkHMConf stdUser { };
+
+        raspberry-pi4 = mkHmConf stdUser { 
+          system = "aarch64-linux"; 
+          configuration.imports = slimModules;
+        };
 
         # The full experience
         nixosdesktop = mkHMConf stdUser {
