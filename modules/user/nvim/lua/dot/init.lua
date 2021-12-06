@@ -1,11 +1,7 @@
-require('plugins')
-
-local nnoremap = function(bind, cmd)
-      vim.api.nvim_set_keymap("n", bind, cmd, { noremap = true, silent = true })
-end
-local nmap = function(bind, cmd)
-      vim.api.nvim_set_keymap("n", bind, cmd, { silent = true })
-end
+require("plugins")
+local u = require("lib.utils")
+local f = require("lib.fun")
+--local module = require("lib.module")
 
 -- general settings
 local opt = vim.opt
@@ -40,12 +36,12 @@ augroup end
 
 -- mappings
 vim.g.mapleader = " "
-nnoremap("<esc>", "<cmd>noh<CR>")
-nnoremap("<leader>lo", "<cmd>copen<CR>")
-nnoremap("<leader>lc", "<cmd>cclose<CR>")
-nnoremap("<c-j>", "<cmd>cnext<CR>")
-nnoremap("<c-k>", "<cmd>cprev<CR>")
-nnoremap("<leader>n", [[<cmd>set nu! rnu!<CR>]])
+u.nnoremap("<esc>", "<cmd>noh<CR>")
+u.nnoremap("<leader>lo", "<cmd>copen<CR>")
+u.nnoremap("<leader>lc", "<cmd>cclose<CR>")
+u.nnoremap("<c-j>", "<cmd>cnext<CR>")
+u.nnoremap("<c-k>", "<cmd>cprev<CR>")
+u.nnoremap("<leader>n", [[<cmd>set nu! rnu!<CR>]])
 
 vim.cmd([[
 augroup Terminal
