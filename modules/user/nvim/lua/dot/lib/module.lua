@@ -12,7 +12,7 @@ require("fun")()
 -- If any of the keys are not found they should be appropriately interpreted as
 -- being empty
 
-local merge = function(t1, t2)
+local function merge(t1, t2)
   for k, v in pairs(t2) do
     if (type(v) == "table") and (type(t1[k] or false) == "table") then
       merge(t1[k], t2[k])
@@ -73,7 +73,7 @@ M.activate_all = function(modules)
   -- Configure packages, need packer
   local packer = require("packer")
   packer.startup(function()
-    map(function(x)
+    each(function(x)
       packer.use(x)
     end, pkgs)
   end)
