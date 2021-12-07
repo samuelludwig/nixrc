@@ -47,15 +47,15 @@ end
 
 local concat_all = function(tables)
   local new_table = {}
-  for t in tables do
+  for _, t in ipairs(tables) do
     new_table = concat(new_table, t)
   end
   return new_table
 end
 
 local run_function_list = function(list)
-  for f in list do
-    f()
+  for _, fn in ipairs(list) do
+    fn()
   end
   return ':ok'
 end
@@ -78,7 +78,7 @@ M.load_all = function(mods)
     if mod['packages'] ~= nil then
       pkgs = concat(pkgs, mod['packages'])
     end
-    if mod['configs'] ~= nil then
+    if mod['config'] ~= nil then
       configs = append(configs, mod['config'])
     end
     if mod['exports'] ~= nil then
@@ -114,7 +114,7 @@ M.activate_all = function(modules)
   return ':ok'
 end
 
--- Need solution for new exports too?
+-- Need solution for new exports and packages too?
 M.reload = function(module)
   local mod = require(module)
   if mod['config'] ~= nil then
