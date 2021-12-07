@@ -1,5 +1,5 @@
 local M = {}
-require("fun")()
+require('fun')()
 
 -- A valid module file should export a table of
 -- SETUP: A typical standalone lambda that should be run for setup/use of the
@@ -12,9 +12,9 @@ require("fun")()
 -- If any of the keys are not found they should be appropriately interpreted as
 -- being empty
 
-local function merge(t1, t2)
+local merge = function(t1, t2)
   for k, v in pairs(t2) do
-    if (type(v) == "table") and (type(t1[k] or false) == "table") then
+    if (type(v) == 'table') and (type(t1[k] or false) == 'table') then
       merge(t1[k], t2[k])
     else
       t1[k] = v
@@ -38,53 +38,60 @@ local concat_all = function(tables)
   return new_table
 end
 
-M.load = function(name)
-  return require(name)
+local run_function_list = function(list)
+  for f in list do
+    f()
+  end
 end
 
-M.load_all = function(dir, except) end
+M.load_dir = function(dir, except)
+  return require(dir)
+end
 
-M.activate_all = function(modules)
+M.load_all = function(modules)
   local setups = {}
   local pkgs = {}
   local configs = {}
   local exports = {}
+
   for modName in modules do
     local mod = require(modName)
-    if mod["setup"] ~= nil then
-      setups = concat(setups, mod["setup"])
+    if mod['setup'] ~= nil then
+      setups = concat(setups, mod['setup'])
     end
-    if mod["packages"] ~= nil then
-      pkgs = concat(pkgs, mod["packages"])
+    if mod['packages'] ~= nil then
+      pkgs = concat(pkgs, mod['packages'])
     end
-    if mod["configs"] ~= nil then
-      configs = concat(configs, mod["config"])
+    if mod['configs'] ~= nil then
+      configs = concat(configs, mod['config'])
     end
-    if mod["exports"] ~= nil then
-      exports[modName] = mod["exports"]
+    if mod['exports'] ~= nil then
+      exports[modName] = mod['exports']
     end
   end
+
+  return { setups = setups, pkgs = pkgs, configs = configs, exports = exports }
+end
+
+M.activate_all = function(modules)
+  Mods = M.load_all(modules)
 
   -- Run setups
-  for lambda in setups do
-    lambda()
-  end
+  run_function_list(Mods.setups)
 
   -- Configure packages, need packer
-  local packer = require("packer")
-  packer.startup(function()
+  local packer = require('packer')
+  packer.startup(function(use)
     each(function(x)
-      packer.use(x)
-    end, pkgs)
+      use(x)
+    end, Mods.pkgs)
   end)
 
   -- Run configs
-  for lambda in configs do
-    lambda()
-  end
+  run_function_list(Mods.configs)
 
   -- Place exports into the global table
-  for k, v in pairs(exports) do
+  for k, v in pairs(Mods.exports) do
     _G[k] = v
   end
   -- merge module fields
