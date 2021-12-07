@@ -1,6 +1,8 @@
 local M = {}
 require('fun')()
 
+-- TODO: NEED method to recall the config of a given arbitrary module at any time
+
 -- A valid module file should export a table of
 -- SETUP: A typical standalone lambda that should be run for setup/use of the
 -- module _before_ packages are installed
