@@ -1,7 +1,5 @@
 local M = {}
-require('fun')()
-
--- TODO: NEED method to recall the config of a given arbitrary module at any time
+require('lib.fun')()
 
 -- A valid module file should export a table of
 -- SETUP: A typical standalone lambda that should be run for setup/use of the
@@ -10,11 +8,21 @@ require('fun')()
 -- CONFIG: A typical standalone lambda that should be run _after_ packages are
 -- installed
 -- EXPORTS: A table of functions/values to be exported
+-- RUN: Arbitrary lua code to be run at any time when invoked
 --
 -- If any of the keys are not found they should be appropriately interpreted as
 -- being empty
+--
+-- Activation flow:
+--   ~merge module fields~
+--   1. run all setups
+--   2. merge packages into one table and then call `use` on all of them in a
+--   `packer.setup` call
+--   3. run all configs
+--   exports should be available to global access under their respective module
+--   names
 
-local merge = function(t1, t2)
+local function merge(t1, t2)
   for k, v in pairs(t2) do
     if (type(v) == 'table') and (type(t1[k] or false) == 'table') then
       merge(t1[k], t2[k])
@@ -32,6 +40,11 @@ local concat = function(t1, t2)
   return t1
 end
 
+local append = function(t, val)
+  t[#t+1] = val
+  return t
+end
+
 local concat_all = function(tables)
   local new_table = {}
   for t in tables do
@@ -44,31 +57,32 @@ local run_function_list = function(list)
   for f in list do
     f()
   end
+  return ':ok'
 end
 
 M.load_dir = function(dir, except)
   return require(dir)
 end
 
-M.load_all = function(modules)
+M.load_all = function(mods)
   local setups = {}
   local pkgs = {}
   local configs = {}
   local exports = {}
 
-  for modName in modules do
-    local mod = require(modName)
+  for _, mod_name in ipairs(mods) do
+    local mod = require(mod_name)
     if mod['setup'] ~= nil then
-      setups = concat(setups, mod['setup'])
+      setups = append(setups, mod['setup'])
     end
     if mod['packages'] ~= nil then
       pkgs = concat(pkgs, mod['packages'])
     end
     if mod['configs'] ~= nil then
-      configs = concat(configs, mod['config'])
+      configs = append(configs, mod['config'])
     end
     if mod['exports'] ~= nil then
-      exports[modName] = mod['exports']
+      exports[mod_name] = mod['exports']
     end
   end
 
@@ -76,7 +90,7 @@ M.load_all = function(modules)
 end
 
 M.activate_all = function(modules)
-  Mods = M.load_all(modules)
+  local Mods = M.load_all(modules)
 
   -- Run setups
   run_function_list(Mods.setups)
@@ -84,9 +98,9 @@ M.activate_all = function(modules)
   -- Configure packages, need packer
   local packer = require('packer')
   packer.startup(function(use)
-    each(function(x)
-      use(x)
-    end, Mods.pkgs)
+    for pkg in Mods.pkgs do
+      use(pkg)
+    end
   end)
 
   -- Run configs
@@ -96,13 +110,31 @@ M.activate_all = function(modules)
   for k, v in pairs(Mods.exports) do
     _G[k] = v
   end
-  -- merge module fields
-  -- 1. run all setups
-  -- 2. merge packages into one table and then call `use` on all of them in a
-  -- `packer.setup` call
-  -- 3. run all configs
-  -- exports should be available to global access under their respective module
-  -- names
+
+  return ':ok'
+end
+
+-- Need solution for new exports too?
+M.reload = function(module)
+  local mod = require(module)
+  if mod['config'] ~= nil then
+    mod.config()
+  end
+  return ':ok'
+end
+
+M.reload_all = function(modules)
+  local Mods = M.load_all(modules)
+  run_function_list(Mods.configs)
+  return ':ok'
+end
+
+M.run = function(module)
+  local mod = require(module)
+  if mod['run'] ~= nil then
+    mod.run()
+  end
+  return ':ok'
 end
 
 return M
