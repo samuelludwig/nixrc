@@ -34,3 +34,5 @@ loaded.exports['modules.test_module'].ping()
 
 mod.run('modules.test_module')
 mod.reload('modules.test_module')
+
+mod.activate_all(mod_list)
