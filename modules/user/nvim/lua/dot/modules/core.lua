@@ -1,5 +1,22 @@
 local M = {}
-local u = require("lib.utils")
+local u = require('lib.utils')
+
+M.packages = {
+  -- Basic requirements
+  { 'wbthomason/packer.nvim' },
+  {
+    'nvim-lua/popup.nvim',
+    'nvim-lua/plenary.nvim',
+  },
+
+  -- Basic usability
+  {
+    'tpope/vim-commentary',
+    'tpope/vim-fugitive',
+    'tpope/vim-abolish',
+    'tpope/vim-surround',
+  },
+}
 
 M.config = function()
   -- general settings
@@ -11,20 +28,20 @@ M.config = function()
   opt.splitright = true
   opt.splitbelow = true
   opt.wrap = false
-  opt.signcolumn = "yes"
+  opt.signcolumn = 'yes'
   opt.tabstop = 2
   opt.shiftwidth = 2
   opt.expandtab = true
   opt.number = true
   opt.relativenumber = true
-  opt.mouse = "a"
-  opt.completeopt = { "menuone", "noselect" }
+  opt.mouse = 'a'
+  opt.completeopt = { 'menuone', 'noselect' }
   opt.foldenable = false
   opt.ignorecase = true
   opt.smartcase = true
-  opt.inccommand = "nosplit"
+  opt.inccommand = 'nosplit'
   -- Cursor
-  opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
+  opt.guicursor = 'n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50'
 
   vim.cmd([[
   augroup YankHighlight
@@ -34,13 +51,13 @@ M.config = function()
   ]])
 
   -- mappings
-  vim.g.mapleader = " "
-  u.nnoremap("<esc>", "<cmd>noh<CR>")
-  u.nnoremap("<leader>lo", "<cmd>copen<CR>")
-  u.nnoremap("<leader>lc", "<cmd>cclose<CR>")
-  u.nnoremap("<c-j>", "<cmd>cnext<CR>")
-  u.nnoremap("<c-k>", "<cmd>cprev<CR>")
-  u.nnoremap("<leader>n", [[<cmd>set nu! rnu!<CR>]])
+  vim.g.mapleader = ' '
+  u.nnoremap('<esc>', '<cmd>noh<CR>')
+  u.nnoremap('<leader>lo', '<cmd>copen<CR>')
+  u.nnoremap('<leader>lc', '<cmd>cclose<CR>')
+  u.nnoremap('<c-j>', '<cmd>cnext<CR>')
+  u.nnoremap('<c-k>', '<cmd>cprev<CR>')
+  u.nnoremap('<leader>n', [[<cmd>set nu! rnu!<CR>]])
 
   vim.cmd([[
   augroup Terminal
@@ -49,7 +66,7 @@ M.config = function()
   augroup end
   ]])
 
-  require("colorbuddy").colorscheme("gruvbuddy")
+  require('colorbuddy').colorscheme('gruvbuddy')
   --vim.cmd('colorscheme vim-earl-grey')
   vim.cmd([[
     hi MatchParen gui=underline

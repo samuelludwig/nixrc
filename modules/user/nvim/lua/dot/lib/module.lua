@@ -98,8 +98,6 @@ M.activate_all = function(modules)
   -- Configure packages, need packer
   local packer = require('packer')
   packer.startup(function(use)
-    use({'wbthomason/packer.nvim'})
-
     for _, pkg in ipairs(Mods.pkgs) do
       use(pkg)
     end

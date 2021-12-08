@@ -2,6 +2,7 @@ local u = require('lib.utils')
 local f = require('lib.fun')
 local mod = require('lib.module')
 local inspect = require('lib.inspect')
+require('packer-bootstrap')
 
 local run_function_list = function(list)
   for _, fn in ipairs(list) do
@@ -20,19 +21,19 @@ local prepend_mod_dot = function(x)
 end
 
 local mod_list = f.totable(f.map(prepend_mod_dot, {
-  'test_module',
+  'core',
+  'stopgap',
+  'vimwiki-mod',
 }))
 
 local loaded = mod.load_all(mod_list)
 
-var_dump(loaded)
+-- run_function_list(loaded.setups)
+-- run_function_list(loaded.configs)
 
-run_function_list(loaded.setups)
-run_function_list(loaded.configs)
+-- loaded.exports['modules.test_module'].ping()
 
-loaded.exports['modules.test_module'].ping()
-
-mod.run('modules.test_module')
-mod.reload('modules.test_module')
+-- mod.run('modules.test_module')
+-- mod.reload('modules.test_module')
 
 mod.activate_all(mod_list)
