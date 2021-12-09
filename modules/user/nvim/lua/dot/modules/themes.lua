@@ -1,3 +1,5 @@
+local u = require('lib.utils')
+
 local M = {}
 
 M.packages = {
@@ -81,6 +83,44 @@ M.packages = {
       require('colorschemes.nvim-solarized-lua')
     end,
   },
+  {
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    config = function()
+      require('colorschemes.catppuccin')
+    end,
+  },
+  {
+    'folke/tokyonight.nvim',
+    config = function()
+      vim.g.tokyonight_style = 'storm'
+      --vim.g.tokyonight_style = 'dark'
+      --vim.g.tokyonight_style = 'day'
+    end,
+  },
+}
+
+M.config = function()
+  local toggle_background = function()
+    local bg = vim.o.background
+    if bg == 'dark' then
+      vim.o.background = 'light'
+    else
+      vim.o.background = 'dark'
+    end
+  end
+  u.nnoremap('<leader>b', [[<Cmd>lua require('modules.themes').exports.toggle_background<CR>]])
+end
+
+M.exports = {
+  toggle_background = function()
+    local bg = vim.o.background
+    if bg == 'dark' then
+      vim.o.background = 'light'
+    else
+      vim.o.background = 'dark'
+    end
+  end,
 }
 
 return M

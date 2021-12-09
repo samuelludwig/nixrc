@@ -15,6 +15,7 @@ local mod_list = f.totable(f.map(prepend_mod_dot, {
   'vimwiki-mod',
   'galaxyline-mod',
   'themes',
+  'interface-helpers',
 }))
 
 mod.activate_all(mod_list)
