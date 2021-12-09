@@ -100,25 +100,27 @@ M.packages = {
   },
 }
 
+--
+-- CONFIG
+--
+
 M.config = function()
-  local toggle_background = function()
-    local bg = vim.o.background
-    if bg == 'dark' then
-      vim.o.background = 'light'
-    else
-      vim.o.background = 'dark'
-    end
-  end
-  u.nnoremap('<leader>b', [[<Cmd>lua require('modules.themes').exports.toggle_background<CR>]])
+  u.nnoremap('<leader>b', [[<Cmd>lua require('modules.themes').exports.toggle_background()<CR>]])
+  u.nnoremap('<leader>cs', [[:colorscheme ]])
 end
+
+--
+-- EXPORTS
+--
+
+local set_bg = function(color) vim.o.background = color end
 
 M.exports = {
   toggle_background = function()
-    local bg = vim.o.background
-    if bg == 'dark' then
-      vim.o.background = 'light'
+    if vim.o.background == 'dark' then
+      set_bg('light')
     else
-      vim.o.background = 'dark'
+      set_bg('dark')
     end
   end,
 }
