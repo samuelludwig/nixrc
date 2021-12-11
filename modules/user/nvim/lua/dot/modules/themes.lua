@@ -98,6 +98,10 @@ M.packages = {
       --vim.g.tokyonight_style = 'day'
     end,
   },
+  {
+    'mcchrish/zenbones.nvim',
+    requires = { 'rktjmp/lush.nvim' },
+  },
 }
 
 --
@@ -113,7 +117,9 @@ end
 -- EXPORTS
 --
 
-local set_bg = function(color) vim.o.background = color end
+local set_bg = function(color)
+  vim.o.background = color
+end
 
 M.exports = {
   toggle_background = function()
