@@ -201,7 +201,6 @@
           system = "x86_64-linux";
           configuration = {
             imports = coreModules ++ uMods [ "kittynonnixos" ];
-            nixpkgs.overlays = (overlays system) ++ [ ];
           };
         };
 
@@ -211,7 +210,7 @@
         # terminal-bound-apps-and-data managed.
         linux-server = mkHMConf stdUser { };
 
-        raspberry-pi4 = mkHmConf stdUser { 
+        raspberry-pi4 = mkHMConf stdUser { 
           system = "aarch64-linux"; 
           configuration.imports = slimModules;
         };

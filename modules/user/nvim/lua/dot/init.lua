@@ -13,9 +13,11 @@ local mod_list = f.totable(f.map(prepend_mod_dot, {
   'telescope-mod',
   'language_smartness',
   'vimwiki-mod',
-  'galaxyline-mod',
+  'lualine',
   'themes',
   'interface-helpers',
+  'file-tree',
+  'terminal',
 }))
 
 mod.activate_all(mod_list)
