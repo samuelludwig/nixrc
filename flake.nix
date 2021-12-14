@@ -101,6 +101,7 @@
         "nickel"
         "php"
         "python"
+        "janet"
         "js"
         "rust"
         "unison"
@@ -133,7 +134,7 @@
         "starship"
         "bashnonnixos"
         "dev-tools"
-      ] ++ langMods [ "php" "lua" "python" ];
+      ] ++ langMods [ "php" "lua" "python" "janet" ];
 
       # Currently scuffed sadsad
       telescope-fzf-native-overlay = final: prev: {
