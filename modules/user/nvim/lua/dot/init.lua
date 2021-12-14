@@ -10,6 +10,7 @@ end
 
 local mod_list = f.totable(f.map(prepend_mod_dot, {
   'core',
+  'lisps',
   'telescope-mod',
   'language_smartness',
   'vimwiki-mod',

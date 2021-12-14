@@ -49,6 +49,7 @@ let
     "nvim/parser/comment.so".source = "${ts.tree-sitter-comment}/parser";
     "nvim/parser/php.so".source = "${ts.tree-sitter-php}/parser";
     "nvim/parser/haskell.so".source = "${ts.tree-sitter-haskell}/parser";
+    "nvim/parser/janet.so".source = "${ts.tree-sitter-clojure}/parser";
   };
 
 in {
