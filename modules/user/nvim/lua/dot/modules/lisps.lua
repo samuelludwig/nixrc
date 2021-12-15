@@ -1,7 +1,9 @@
 local M = {}
 
 M.packages = {
-  { "janet-lang/janet.vim" },
+  { 'Olical/aniseed' },
+  { 'bakpakin/fennel.vim' },
+  { 'janet-lang/janet.vim' },
 }
 
 return M

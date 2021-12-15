@@ -19,6 +19,7 @@ local mod_list = f.totable(f.map(prepend_mod_dot, {
   'interface-helpers',
   'file-tree',
   'terminal',
+  'repl',
 }))
 
 mod.activate_all(mod_list)
