@@ -15,6 +15,7 @@ let
     nodePackages.yaml-language-server
     nodePackages.vscode-json-languageserver
     nodePackages.pyright
+    clojure-lsp
     rnix-lsp
     sumneko-lua-language-server
     haskell-language-server
@@ -50,6 +51,7 @@ let
     "nvim/parser/php.so".source = "${ts.tree-sitter-php}/parser";
     "nvim/parser/haskell.so".source = "${ts.tree-sitter-haskell}/parser";
     "nvim/parser/janet.so".source = "${ts.tree-sitter-clojure}/parser";
+    "nvim/parser/clojure.so".source = "${ts.tree-sitter-clojure}/parser";
   };
 
 in {
