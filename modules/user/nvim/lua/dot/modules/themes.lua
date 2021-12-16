@@ -3,37 +3,32 @@ local u = require('lib.utils')
 local M = {}
 
 M.packages = {
-  {
-    'tjdevries/colorbuddy.vim',
-    'tjdevries/gruvbuddy.nvim',
-  },
-  {
-    'jacksonludwig/vim-earl-grey',
-    requires = { 'rktjmp/lush.nvim' },
-    -- config = function()
-    --   vim.cmd("colorscheme vim-earl-grey")
-    --   vim.cmd([[
-    --      hi StatusLine gui=NONE
-    --      hi StatusLine guibg=NONE
-    --      hi StatusLineNC guibg=NONE
-    --      hi StatusLineNC gui=NONE
-    --   ]])
-    -- end,
-  },
-  { 'sainnhe/sonokai' }, -- Settings found in `:help sonokai`
-  { 'sainnhe/edge' },
-  { 'sainnhe/everforest' },
-  { 'sainnhe/gruvbox-material' },
-  { 'Th3Whit3Wolf/space-nvim' },
-  { 'Th3Whit3Wolf/onebuddy' },
-  { 'jacoborus/tender.vim' },
-  { 'owickstrom/vim-colors-paramount' },
-  --use({ "rj-white/vim-colors-paramountblue" }) -- not real??
-  { 'https://gitlab.com/yorickpeterse/vim-paper.git' },
   { 'huyvohcmc/atlas.vim' },
   { 'ray-x/aurora' },
+  { 'kyazdani42/blue-moon' },
+  { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' },
+  {
+    'catppuccin/nvim',
+    as = 'catppuccin',
+    config = function()
+      require('colorschemes.catppuccin')
+    end,
+  },
+  { 'tjdevries/colorbuddy.vim' },
+  { 'sainnhe/edge' },
+  { 'sainnhe/everforest' },
+  { 'kamwitsta/flatwhite-vim' },
+  { 'bkegley/gloombuddy', requires = { 'tjdevries/colorbuddy.vim' } },
+  { 'sainnhe/gruvbox-material' },
+  { 'tjdevries/gruvbuddy.nvim', requires = 'tjdevries/colorbuddy.vim' },
+  { 'katawful/kat.nvim' },
   { 'tanvirtin/monokai.nvim' },
-  { 'cseelus/vim-colors-lucid' },
+  {
+    'shaunsingh/moonlight.nvim',
+    config = function()
+      require('colorschemes.moonlight')
+    end,
+  },
   {
     'maaslalani/nordbuddy',
     config = function()
@@ -61,22 +56,7 @@ M.packages = {
       --})
     end,
   },
-  { 'kyazdani42/blue-moon' },
-  { 'mhartington/oceanic-next' },
-  { 'glepnir/zephyr-nvim' },
-  { 'rockerBOO/boo-colorscheme-nvim', branch = 'main' },
-  { 'bkegley/gloombuddy', requires = { 'tjdevries/colorbuddy.vim' } },
-  { 'tomasiser/vim-code-dark' },
-  { 'sts10/vim-pink-moon' },
   { 'shaunsingh/nord.nvim' },
-  {
-    'shaunsingh/moonlight.nvim',
-    config = function()
-      require('colorschemes.moonlight')
-    end,
-  },
-  { 'kamwitsta/flatwhite-vim' },
-  { 'navarasu/onedark.nvim' },
   {
     'ishan9299/nvim-solarized-lua',
     config = function()
@@ -84,12 +64,31 @@ M.packages = {
     end,
   },
   {
-    'catppuccin/nvim',
-    as = 'catppuccin',
-    config = function()
-      require('colorschemes.catppuccin')
-    end,
+    'jacksonludwig/vim-earl-grey',
+    requires = { 'rktjmp/lush.nvim' },
+    -- config = function()
+    --   vim.cmd("colorscheme vim-earl-grey")
+    --   vim.cmd([[
+    --      hi StatusLine gui=NONE
+    --      hi StatusLine guibg=NONE
+    --      hi StatusLineNC guibg=NONE
+    --      hi StatusLineNC gui=NONE
+    --   ]])
+    -- end,
   },
+  { 'sainnhe/sonokai' }, -- Settings found in `:help sonokai`
+  { 'Th3Whit3Wolf/space-nvim' },
+  { 'Th3Whit3Wolf/onebuddy' },
+  { 'jacoborus/tender.vim' },
+  { 'owickstrom/vim-colors-paramount' },
+  --use({ "rj-white/vim-colors-paramountblue" }) -- not real??
+  { 'https://gitlab.com/yorickpeterse/vim-paper.git' },
+  { 'cseelus/vim-colors-lucid' },
+  { 'mhartington/oceanic-next' },
+  { 'glepnir/zephyr-nvim' },
+  { 'tomasiser/vim-code-dark' },
+  { 'sts10/vim-pink-moon' },
+  { 'navarasu/onedark.nvim' },
   {
     'folke/tokyonight.nvim',
     config = function()

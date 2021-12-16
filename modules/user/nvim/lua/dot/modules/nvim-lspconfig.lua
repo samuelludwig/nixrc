@@ -77,6 +77,10 @@ nvim_lsp.intelephense.setup({
   on_attach = on_attach_common,
 })
 
+nvim_lsp.clojure_lsp.setup({
+  on_attach = on_attach_common,
+})
+
 nvim_lsp.rnix.setup({
   on_attach = on_attach_common,
 })

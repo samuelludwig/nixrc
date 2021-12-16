@@ -94,6 +94,7 @@
       sysMods = modList: toMods "system" modList;
 
       langModList = langMods [
+        "clojure"
         "dhall"
         "elixir"
         "haskell"
