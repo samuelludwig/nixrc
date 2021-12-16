@@ -1,3 +1,5 @@
+local u = require('lib.utils')
+
 local M = {}
 
 telescope_config = function()
@@ -23,72 +25,17 @@ telescope_config = function()
 
   --     telescope.load_extension("fzf")
 
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader><leader>',
-    "<cmd>lua require('telescope.builtin').find_files()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>fh',
-    "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>fr',
-    "<cmd>lua require('telescope.builtin').oldfiles()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>fi',
-    "<cmd>lua require('telescope.builtin').live_grep({ cwd = '~/vimwiki' })<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>bb',
-    "<cmd>lua require('telescope.builtin').buffers()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>g',
-    "<cmd>lua require('telescope.builtin').live_grep()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>ff',
-    "<cmd>lua require('telescope.builtin').file_browser()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>vc',
-    "<cmd>lua require('telescope.builtin').git_commits()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>vb',
-    "<cmd>lua require('telescope.builtin').git_branches()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>sdd',
-    "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>",
-    { noremap = true, silent = true }
-  )
-  vim.api.nvim_set_keymap(
-    'n',
-    '<leader>sdw',
-    "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>",
-    { noremap = true, silent = true }
-  )
+  u.nnoremap('<leader><leader>', "<cmd>lua require('telescope.builtin').find_files()<cr>")
+  u.nnoremap('<leader>fh', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>")
+  u.nnoremap('<leader>fr', "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
+  u.nnoremap('<leader>fi', "<cmd>lua require('telescope.builtin').live_grep({ cwd = '~/vimwiki' })<cr>")
+  u.nnoremap('<leader>bb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
+  u.nnoremap('<leader>g', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+  u.nnoremap('<leader>ff', "<cmd>lua require('telescope.builtin').file_browser()<cr>")
+  u.nnoremap('<leader>vc', "<cmd>lua require('telescope.builtin').git_commits()<cr>")
+  u.nnoremap('<leader>vb', "<cmd>lua require('telescope.builtin').git_branches()<cr>")
+  u.nnoremap('<leader>sdd', "<cmd>lua require('telescope.builtin').lsp_document_diagnostics()<cr>")
+  u.nnoremap('<leader>sdw', "<cmd>lua require('telescope.builtin').lsp_workspace_diagnostics()<cr>")
 end
 
 M.packages = {
