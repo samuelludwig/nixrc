@@ -5,6 +5,9 @@ M.packages = {
     'LnL7/vim-nix',
     ft = { 'nix' },
   },
+  {
+    'vmchale/dhall-vim',
+  },
 
   {
     'nvim-treesitter/nvim-treesitter',

@@ -110,6 +110,9 @@ M.packages = {
 M.config = function()
   u.nnoremap('<leader>b', [[<Cmd>lua require('modules.themes').exports.toggle_background()<CR>]])
   u.nnoremap('<leader>cs', [[:colorscheme ]])
+
+  --require('colorbuddy').colorscheme('gruvbuddy')
+  vim.cmd('colorscheme space-nvim')
 end
 
 --
