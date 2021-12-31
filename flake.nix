@@ -123,6 +123,7 @@
         "fish"
         "starship"
         "gitea"
+        "podman"
       ] ++ langModList;
 
       slimModules = uMods [
