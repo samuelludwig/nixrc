@@ -58,8 +58,8 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.phpcbf.with({
       filetypes = { 'php' },
-      command = { 'phpcbf' },
-      args = { '--standard=PSR12', '-' },
+      -- command = 'phpcbf',
+      -- args = { '--standard=PSR12', '-' },
     }),
   },
   on_attach = function(_, bufnr)
