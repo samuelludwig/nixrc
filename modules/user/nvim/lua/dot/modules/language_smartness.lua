@@ -5,6 +5,7 @@ M.packages = {
     'LnL7/vim-nix',
     ft = { 'nix' },
   },
+
   {
     'vmchale/dhall-vim',
   },
@@ -22,6 +23,10 @@ M.packages = {
   },
 
   {
+    'RRethy/vim-illuminate',
+  },
+
+  {
     'ahmedkhalf/project.nvim',
     config = function()
       require('project_nvim').setup({})
@@ -33,6 +38,7 @@ M.packages = {
     requires = {
       'jose-elias-alvarez/nvim-lsp-ts-utils',
       'jose-elias-alvarez/null-ls.nvim',
+      'RRethy/vim-illuminate',
     },
     config = function()
       require('modules.nvim-lspconfig')
@@ -83,7 +89,9 @@ M.packages = {
   {
     'windwp/nvim-autopairs',
     config = function()
-      require('nvim-autopairs').setup{}
+      require('nvim-autopairs').setup({
+        enable_check_bracket_line = false,
+      })
     end,
   },
 }
