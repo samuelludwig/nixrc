@@ -16,6 +16,10 @@ M.packages = {
     'tpope/vim-abolish',
     'tpope/vim-surround',
   },
+  {
+    'ggandor/lightspeed.nvim',
+    requires = 'tpope/vim-repeat',
+  }
 }
 
 M.config = function()

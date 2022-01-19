@@ -20,6 +20,7 @@ M.packages = {
         indent = { enable = true },
       })
     end,
+    commit = '668de0951a36ef17016074f1120b6aacbe6c4515', --undo when shit gets fixed in nix i guess
   },
 
   {
